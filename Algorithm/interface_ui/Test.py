@@ -1,121 +1,75 @@
-#!/usr/bin/env python
-#-*- coding:utf-8 -*-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-import pandas as pd
 
 
-class myWindow(QtWidgets.QMainWindow):
+class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
-        super(myWindow, self).__init__(parent)
-        self.centralwidget  = QtWidgets.QWidget(self)
-        self.lineEdit       = QtWidgets.QLineEdit(self.centralwidget)
-        self.view           = QtWidgets.QTableView(self.centralwidget)
-        self.comboBox       = QtWidgets.QComboBox(self.centralwidget)
-        self.label          = QtWidgets.QLabel(self.centralwidget)
+        super(MainWindow, self).__init__(parent)
 
-        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout.addWidget(self.lineEdit, 0, 1, 1, 1)
-        self.gridLayout.addWidget(self.view, 1, 0, 1, 3)
-        self.gridLayout.addWidget(self.comboBox, 0, 2, 1, 1)
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        self.m_tablewidget = QtWidgets.QTableWidget(0, 3)
+        self.m_tablewidget.setHorizontalHeaderLabels(
+            ["Col 1", "Col 2", "Col 3"]
+        )
+        self.m_button = QtWidgets.QPushButton("Add Row", clicked=self.onClicked)
 
-        self.setCentralWidget(self.centralwidget)
-        self.label.setText("Regex Filter")
-
-        self.model = QtGui.QStandardItemModel(self)
-        self.df = pd.read_excel(r"C:\Users\Root\Desktop\Projects\OTBD\Test_data\Шаблон.xlsx")
-        for i,row in self.df.iterrows():
-            self.model.invisibleRootItem().appendRow([QtGui.QStandardItem(str(i)) for i in row.values])
-
-        self.proxy = QtCore.QSortFilterProxyModel(self)
-        self.proxy.setSourceModel(self.model)
-
-        self.view.setModel(self.proxy)
-        self.comboBox.addItems(self.df.columns.values)
-
-        self.lineEdit.textChanged.connect(self.on_lineEdit_textChanged)
-        self.comboBox.currentIndexChanged.connect(self.on_comboBox_currentIndexChanged)
-
-        self.horizontalHeader = self.view.horizontalHeader()
-        self.horizontalHeader.sectionClicked.connect(self.on_view_horizontalHeader_sectionClicked)
-
-    @QtCore.pyqtSlot(int)
-    def on_view_horizontalHeader_sectionClicked(self, logicalIndex):
-        self.logicalIndex   = logicalIndex
-        self.menuValues     = QtWidgets.QMenu(self)
-        self.signalMapper   = QtCore.QSignalMapper(self)
-
-        self.comboBox.blockSignals(True)
-        self.comboBox.setCurrentIndex(self.logicalIndex)
-        self.comboBox.blockSignals(True)
-
-        valuesUnique = [    self.model.item(row, self.logicalIndex).text()
-                            for row in range(self.model.rowCount())
-                            ]
-
-        actionAll = QtWidgets.QAction("All", self)
-        actionAll.triggered.connect(self.on_actionAll_triggered)
-        self.menuValues.addAction(actionAll)
-        self.menuValues.addSeparator()
-
-        for actionNumber, actionName in enumerate(sorted(list(set(valuesUnique)))):
-            action = QtWidgets.QAction(actionName, self)
-            self.signalMapper.setMapping(action, actionNumber)
-            action.triggered.connect(self.signalMapper.map)
-            self.menuValues.addAction(action)
-
-        self.signalMapper.mapped.connect(self.on_signalMapper_mapped)
-
-        headerPos = self.view.mapToGlobal(self.horizontalHeader.pos())
-
-        posY = headerPos.y() + self.horizontalHeader.height()
-        posX = headerPos.x() + self.horizontalHeader.sectionPosition(self.logicalIndex)
-
-        self.menuValues.exec_(QtCore.QPoint(posX, posY))
+        central_widget = QtWidgets.QWidget()
+        self.setCentralWidget(central_widget)
+        lay = QtWidgets.QVBoxLayout(central_widget)
+        lay.addWidget(self.m_tablewidget)
+        lay.addWidget(self.m_button, alignment=QtCore.Qt.AlignLeft)
 
     @QtCore.pyqtSlot()
-    def on_actionAll_triggered(self):
-        filterColumn = self.logicalIndex
-        filterString = QtCore.QRegExp(  "",
-                                        QtCore.Qt.CaseInsensitive,
-                                        QtCore.QRegExp.RegExp
-                                        )
+    def addRow(self):
+        button = self.sender()
+        if not isinstance(button, QtWidgets.QPushButton):
+            return
+        p = button.mapTo(self.m_tablewidget.viewport(), QtCore.QPoint())
+        ix = self.m_tablewidget.indexAt(p)
+        if not ix.isValid() or ix.column() != 0:
+            return
+        r = ix.row()
+        ix_combobox = 0
+        text = ""
+        combo = self.m_tablewidget.cellWidget(r, 1)
+        if isinstance(combo, QtWidgets.QComboBox):
+            ix_combobox = combo.currentIndex()
+        item = self.m_tablewidget.item(r, 2)
+        if item is not None:
+            text = item.text()
+        self.insert_row(row=r + 1, ix_combobox=ix_combobox, text=text)
 
-        self.proxy.setFilterRegExp(filterString)
-        self.proxy.setFilterKeyColumn(filterColumn)
+    @QtCore.pyqtSlot()
+    def onClicked(self):
+        self.insert_row()
 
-    @QtCore.pyqtSlot(int)
-    def on_signalMapper_mapped(self, i):
-        stringAction = self.signalMapper.mapping(i).text()
-        filterColumn = self.logicalIndex
-        filterString = QtCore.QRegExp(  stringAction,
-                                        QtCore.Qt.CaseSensitive,
-                                        QtCore.QRegExp.FixedString
-                                        )
-
-        self.proxy.setFilterRegExp(filterString)
-        self.proxy.setFilterKeyColumn(filterColumn)
-
-    @QtCore.pyqtSlot(str)
-    def on_lineEdit_textChanged(self, text):
-        search = QtCore.QRegExp(    text,
-                                    QtCore.Qt.CaseInsensitive,
-                                    QtCore.QRegExp.RegExp
-                                    )
-
-        self.proxy.setFilterRegExp(search)
-
-    @QtCore.pyqtSlot(int)
-    def on_comboBox_currentIndexChanged(self, index):
-        self.proxy.setFilterKeyColumn(index)
+    def insert_row(self, d=None, ix_combobox=0, text="", row=-1):
+        if d is None:
+            d = {
+                "a": ["x", "y", "z"],
+                "b": ["4", "5", "6"],
+                "c": ["21", "22", "23"],
+            }
+        combobox = QtWidgets.QComboBox()
+        for k, v in d.items():
+            combobox.addItem(k, v)
+        combobox.setCurrentIndex(ix_combobox)
+        item = QtWidgets.QTableWidgetItem()
+        copyROw_button = QtWidgets.QPushButton("ADD ROW", clicked=self.addRow)
+        if row == -1:
+            row = self.m_tablewidget.rowCount()
+        self.m_tablewidget.insertRow(row)
+        for i, combo in enumerate((copyROw_button, combobox)):
+            self.m_tablewidget.setCellWidget(row, i, combo)
+        if text:
+            self.m_tablewidget.setItem(row, 2, QtWidgets.QTableWidgetItem(text))
 
 
 if __name__ == "__main__":
     import sys
 
-    app  = QtWidgets.QApplication(sys.argv)
-    main = myWindow()
-    main.show()
-    main.resize(400, 600)
+    app = QtWidgets.QApplication(sys.argv)
+
+    w = MainWindow()
+    w.resize(640, 480)
+    w.show()
+
     sys.exit(app.exec_())

@@ -2,9 +2,9 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import pyqtSlot
 from Algorithm.ui_OTBD import UI_OTBD
-from Algorithm.ui_SOZ import UI_SOZ
+from Algorithm.ui_SOZ import MainWindow as UI_SOZ
 import sys
-
+import Algorithm.sql_connect
 
 class Ui_MainWindow(object):
     def __init__(self):
@@ -41,11 +41,11 @@ class Ui_MainWindow(object):
 
     def show_ui_SOZ(self):
         self.UI_SOZ = UI_SOZ()
-        self.UI_SOZ.MainWindow.show()
+        self.UI_SOZ.show()
 
     def show_ui_OTBD(self):
         self.ui_OTBD = UI_OTBD()
-        self.ui_OTBD.MainWindow.show()
+        self.ui_OTBD.show()
 
 
     def retranslateUi(self, MainWindow):

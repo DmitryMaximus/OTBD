@@ -7,7 +7,18 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1pQvSLaALE0x4Oj5DpuMn2BaS4e" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -19,7 +30,7 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.ui_mainwindow">
-    <configuration name="Deduplicate" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="Test_proxy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OTBD" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -31,7 +42,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/Deduplicate.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/Test_proxy.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -40,7 +51,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="ui_OTBD (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OTBD" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -52,7 +63,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/interface_ui/Test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/interface_ui/ui_OTBD.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ui_OTBD" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="OTBD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Algorithm" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/ui_OTBD.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -106,9 +138,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.ui_mainwindow" />
-        <item itemvalue="Python.Test" />
+        <item itemvalue="Python.ui_OTBD" />
+        <item itemvalue="Python.ui_OTBD (1)" />
         <item itemvalue="Python.ui_SOZ" />
-        <item itemvalue="Python.Deduplicate" />
+        <item itemvalue="Python.Test_proxy" />
       </list>
     </recent_temporary>
   </component>
@@ -126,6 +159,10 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="2125" y="358" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615343771965">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2125" y="358" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1615343771965" />
     <state x="2212" y="626" key="#xdebugger.evaluate" timestamp="1615232958578">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -138,55 +175,55 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1500" y="455" key="FileChooserDialogImpl/0.0.3440.1400@0.0.3440.1400" timestamp="1615247794411" />
-    <state width="1704" height="400" key="GridCell.Tab.0.bottom" timestamp="1615251693596">
+    <state width="1696" height="486" key="GridCell.Tab.0.bottom" timestamp="1615395304026">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1704" height="400" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615251693596" />
-    <state width="1704" height="400" key="GridCell.Tab.0.center" timestamp="1615251693596">
+    <state width="1696" height="486" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
+    <state width="1696" height="486" key="GridCell.Tab.0.center" timestamp="1615395304026">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1704" height="400" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615251693596" />
-    <state width="1704" height="400" key="GridCell.Tab.0.left" timestamp="1615251693596">
+    <state width="1696" height="486" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
+    <state width="1696" height="486" key="GridCell.Tab.0.left" timestamp="1615395304026">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1704" height="400" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615251693596" />
-    <state width="1704" height="400" key="GridCell.Tab.0.right" timestamp="1615251693596">
+    <state width="1696" height="486" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
+    <state width="1696" height="486" key="GridCell.Tab.0.right" timestamp="1615395304026">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1704" height="400" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615251693596" />
-    <state width="1696" height="491" key="GridCell.Tab.1.bottom" timestamp="1615246162708">
+    <state width="1696" height="486" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
+    <state width="1696" height="486" key="GridCell.Tab.1.bottom" timestamp="1615395304027">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="491" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615246162708" />
-    <state width="1696" height="491" key="GridCell.Tab.1.center" timestamp="1615246162708">
+    <state width="1696" height="486" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304027" />
+    <state width="1696" height="486" key="GridCell.Tab.1.center" timestamp="1615395304026">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="491" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615246162708" />
-    <state width="1696" height="491" key="GridCell.Tab.1.left" timestamp="1615246162708">
+    <state width="1696" height="486" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
+    <state width="1696" height="486" key="GridCell.Tab.1.left" timestamp="1615395304026">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="491" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615246162708" />
-    <state width="1696" height="491" key="GridCell.Tab.1.right" timestamp="1615246162708">
+    <state width="1696" height="486" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
+    <state width="1696" height="486" key="GridCell.Tab.1.right" timestamp="1615395304026">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="491" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615246162708" />
-    <state x="1221" y="342" key="SettingsEditor" timestamp="1615225894037">
+    <state width="1696" height="486" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
+    <state x="1221" y="342" key="SettingsEditor" timestamp="1615375235496">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1221" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1615225894037" />
+    <state x="1221" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1615375235496" />
     <state x="1221" y="382" key="SettingsEditor/0.40.3440.1400@0.40.3440.1400" timestamp="1615206378032" />
     <state width="867" height="703" key="XDebugger.FullValuePopup" timestamp="1615232979355">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state width="867" height="703" key="XDebugger.FullValuePopup/0.0.3440.1400@0.0.3440.1400" timestamp="1615232979355" />
-    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1615220344786">
+    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1615450218356">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1615220344786" />
-    <state x="-7" y="0" width="1726" height="957" key="dock-window-1" timestamp="1615251531503">
+    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1615450218356" />
+    <state x="-7" y="0" width="1727" height="957" key="dock-window-1" timestamp="1615377151706">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="-7" y="0" width="1726" height="957" key="dock-window-1/0.0.3440.1400@0.0.3440.1400" timestamp="1615251531503" />
+    <state x="-7" y="0" width="1727" height="957" key="dock-window-1/0.0.3440.1400@0.0.3440.1400" timestamp="1615377151706" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
