@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="26ad4ba3-49f3-434a-8feb-414a36fb5055" name="Default Changelist" comment="" />
+    <list default="true" id="26ad4ba3-49f3-434a-8feb-414a36fb5055" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Algorithm/db_connection.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Algorithm/interface_ui/ui_EditCell.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Algorithm/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/Deduplicate.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/proxy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/ui_OTBD.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/ui_OTBD.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/ui_SOZ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/ui_SOZ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/ui_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/ui_mainwindow.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,6 +25,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1pQvSLaALE0x4Oj5DpuMn2BaS4e" />
@@ -29,8 +44,8 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.ui_mainwindow">
-    <configuration name="Test_proxy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.ui_SOZ">
+    <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OTBD" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -42,7 +57,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/Test_proxy.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -51,28 +66,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="ui_OTBD (1)" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="OTBD" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Algorithm/interface_ui" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/interface_ui/ui_OTBD.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="ui_OTBD" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="proxy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OTBD" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -84,7 +78,28 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/ui_OTBD.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/proxy.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="OTBD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Algorithm" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -137,11 +152,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ui_mainwindow" />
-        <item itemvalue="Python.ui_OTBD" />
-        <item itemvalue="Python.ui_OTBD (1)" />
         <item itemvalue="Python.ui_SOZ" />
-        <item itemvalue="Python.Test_proxy" />
+        <item itemvalue="Python.model" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.proxy" />
+        <item itemvalue="Python.ui_mainwindow" />
       </list>
     </recent_temporary>
   </component>
@@ -163,70 +178,97 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2125" y="358" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1615343771965" />
-    <state x="2212" y="626" key="#xdebugger.evaluate" timestamp="1615232958578">
+    <state x="1477" y="503" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1615654937392">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2212" y="626" key="#xdebugger.evaluate/0.0.3440.1400@0.0.3440.1400" timestamp="1615232958578" />
+    <state x="1477" y="503" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400@0.0.3440.1400" timestamp="1615654937392" />
+    <state x="772" y="803" width="793" height="563" key="#xdebugger.evaluate" timestamp="1615786273406">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="772" y="803" width="793" height="563" key="#xdebugger.evaluate/0.0.3440.1400@0.0.3440.1400" timestamp="1615786273406" />
     <state x="1813" y="100" width="1534" height="1207" key="DiffContextDialog" timestamp="1615242267047">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1813" y="100" width="1534" height="1207" key="DiffContextDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1615242267047" />
-    <state x="1500" y="455" key="FileChooserDialogImpl" timestamp="1615247794411">
+    <state x="1500" y="455" key="FileChooserDialogImpl" timestamp="1615550200360">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1500" y="455" key="FileChooserDialogImpl/0.0.3440.1400@0.0.3440.1400" timestamp="1615247794411" />
-    <state width="1696" height="486" key="GridCell.Tab.0.bottom" timestamp="1615395304026">
+    <state x="1500" y="455" key="FileChooserDialogImpl/0.0.3440.1400@0.0.3440.1400" timestamp="1615550200360" />
+    <state width="1696" height="196" key="GridCell.Tab.0.bottom" timestamp="1615788013759">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="486" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
-    <state width="1696" height="486" key="GridCell.Tab.0.center" timestamp="1615395304026">
+    <state width="1696" height="196" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615788013759" />
+    <state width="1696" height="196" key="GridCell.Tab.0.center" timestamp="1615788013759">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="486" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
-    <state width="1696" height="486" key="GridCell.Tab.0.left" timestamp="1615395304026">
+    <state width="1696" height="196" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615788013759" />
+    <state width="1696" height="196" key="GridCell.Tab.0.left" timestamp="1615788013759">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="486" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
-    <state width="1696" height="486" key="GridCell.Tab.0.right" timestamp="1615395304026">
+    <state width="1696" height="196" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615788013759" />
+    <state width="1696" height="196" key="GridCell.Tab.0.right" timestamp="1615788013759">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="486" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
-    <state width="1696" height="486" key="GridCell.Tab.1.bottom" timestamp="1615395304027">
+    <state width="1696" height="196" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615788013759" />
+    <state width="1696" height="196" key="GridCell.Tab.1.bottom" timestamp="1615788033654">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="486" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304027" />
-    <state width="1696" height="486" key="GridCell.Tab.1.center" timestamp="1615395304026">
+    <state width="1696" height="196" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615788033654" />
+    <state width="1696" height="196" key="GridCell.Tab.1.center" timestamp="1615788033654">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="486" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
-    <state width="1696" height="486" key="GridCell.Tab.1.left" timestamp="1615395304026">
+    <state width="1696" height="196" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615788033654" />
+    <state width="1696" height="196" key="GridCell.Tab.1.left" timestamp="1615788033654">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="486" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
-    <state width="1696" height="486" key="GridCell.Tab.1.right" timestamp="1615395304026">
+    <state width="1696" height="196" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615788033654" />
+    <state width="1696" height="196" key="GridCell.Tab.1.right" timestamp="1615788033654">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="486" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615395304026" />
-    <state x="1221" y="342" key="SettingsEditor" timestamp="1615375235496">
+    <state width="1696" height="196" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615788033654" />
+    <state x="1221" y="342" key="SettingsEditor" timestamp="1615648685532">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1221" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1615375235496" />
+    <state x="1221" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1615648685532" />
     <state x="1221" y="382" key="SettingsEditor/0.40.3440.1400@0.40.3440.1400" timestamp="1615206378032" />
-    <state width="867" height="703" key="XDebugger.FullValuePopup" timestamp="1615232979355">
+    <state width="867" height="703" key="XDebugger.FullValuePopup" timestamp="1615755421148">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="867" height="703" key="XDebugger.FullValuePopup/0.0.3440.1400@0.0.3440.1400" timestamp="1615232979355" />
-    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1615450218356">
+    <state width="867" height="703" key="XDebugger.FullValuePopup/0.0.3440.1400@0.0.3440.1400" timestamp="1615755421148" />
+    <state x="-7" y="0" width="1734" height="1407" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1615732442500">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1615450218356" />
-    <state x="-7" y="0" width="1727" height="957" key="dock-window-1" timestamp="1615377151706">
+    <state x="-7" y="0" width="1734" height="1407" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1615732442500" />
+    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1615721667623">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="-7" y="0" width="1727" height="957" key="dock-window-1/0.0.3440.1400@0.0.3440.1400" timestamp="1615377151706" />
+    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1615721667623" />
+    <state x="2151" y="439" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1615740982836">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2151" y="439" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.3440.1400@0.0.3440.1400" timestamp="1615740982836" />
+    <state x="-7" y="0" width="1442" height="1162" key="dock-window-1" timestamp="1615772189185">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="-7" y="0" width="1442" height="1162" key="dock-window-1/0.0.3440.1400@0.0.3440.1400" timestamp="1615772189185" />
+    <state x="0" y="0" width="1501" height="1162" key="dock-window-2" timestamp="1615772239543">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="0" y="0" width="1501" height="1162" key="dock-window-2/0.0.3440.1400@0.0.3440.1400" timestamp="1615772239543" />
+    <state x="2211" y="400" width="737" height="606" key="find.popup" timestamp="1615767059708">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2211" y="400" width="737" height="606" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1615767059708" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Algorithm/db_connection.py</url>
+          <line>42</line>
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">

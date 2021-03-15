@@ -5,7 +5,7 @@
 
 import pandas
 import operator
-from PyQt5 import QtCore, QtWidgets, QtWidgets
+from PyQt5 import QtCore, QtWidgets, QtWidgets,QtGui
 import sys
 
 from functools import partial
@@ -448,7 +448,7 @@ class FilterListMenuWidget(QtWidgets.QWidgetAction):
 
         def _build_item(item, state=None):
             i = QtWidgets.QListWidgetItem('%s' % item)
-            i.setFlags(i.flags() | QtCore.Qt.ItemIsUserCheckable)
+            i.setFlags(i.flags() | QtCore.Qt.ItemIsUserCheckable | QtCore.Qt.ItemIsEditable)
             if state is None:
                 if item in disp_col:
                     state = QtCore.Qt.Checked
@@ -612,8 +612,9 @@ class DataFrameWidget(QtWidgets.QTableView):
         self.setItemDelegate(delegate)
         # Show the edit widget as soon as the user clicks in the cell
         #  (needed for item delegate)
-        self.setEditTriggers(self.CurrentChanged)
-
+        # self.setEditTriggers(self.CurrentChanged)
+        self.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers |
+                             QtWidgets.QAbstractItemView.DoubleClicked)
         # Initilize to passed dataframe
         if df is None:
             df = pandas.DataFrame()
@@ -642,7 +643,7 @@ class DataFrameWidget(QtWidgets.QTableView):
             menu (QMenu)
                 Same menu passed in, with added actions
         """
-        cell_val = self.df.iget_value(row_ix, col_ix)
+        cell_val = self.df.iat[row_ix, col_ix]
 
         # Quick Filter
         def _quick_filter(s_col):
@@ -747,12 +748,13 @@ class DataFrameWidget(QtWidgets.QTableView):
         self._data_model.setDataFrame(dataFrame)
 
     def keyPressEvent(self, event):
-        """Implements keyboard shortcuts"""
-        if event.matches(QtWidgets.QKeySequence.Copy):
-            self.copy()
-        else:
-            # Pass up
-            super(DataFrameWidget, self).keyPressEvent(event)
+        return
+        # """Implements keyboard shortcuts"""
+        # if event.matches(QtGui.QKeySequence.Copy):
+        #     self.copy()
+        # else:
+        #     # Pass up
+        #     super(DataFrameWidget, self).keyPressEvent(event)
 
     def copy(self):
         """Copy selected cells into copy-buffer"""
@@ -769,11 +771,12 @@ class DataFrameWidget(QtWidgets.QTableView):
             col = idx.column()
             item = idx.data()
             if item:
-                items = items.set_value(row, col, str(item.toString()))
+                # items = items.set_value(row, col, str(item.toString()))
+                items.at[row,col] = str(str(item))
 
         # Make into tab-delimited text (best for Excel)
         items = list(items.itertuples(index=False))
-        s = '\n'.join(['\t'.join([cell for cell in row]) for row in items])
+        s = '\n'.join(['\t'.join([str(cell) for cell in row]) for row in items])
 
         # Send to clipboard
         QtWidgets.QApplication.clipboard().setText(s)
@@ -839,11 +842,12 @@ class ExampleWidgetForWidgetedCell(QtWidgets.QComboBox):
     """
     def __init__(self, parent):
         super(ExampleWidgetForWidgetedCell, self).__init__(parent)
-        self.addItem("Option A")
-        self.addItem("Option B")
-        self.addItem("Option C")
+
         self.setCurrentIndex(0)
 
+    def setOptions(self,options:list):
+        for item in options:
+            self.addItem(str(item))
 
     def getWidgetedCellState(self):
         return self.currentIndex()
@@ -853,23 +857,12 @@ class ExampleWidgetForWidgetedCell(QtWidgets.QComboBox):
 
 
 if __name__ == '__main__':
-    # Create a quick example
     _app = QtWidgets.QApplication(sys.argv)
-    import string
-    import random
 
-    rnd_txt = lambda: "".join( [random.choice(string.ascii_letters[:26]) for i in range(15)] )
-    df = [['a','b','c']*3]
-    for j in range(5):
-        r = []
-        for k in range(6):
-            r.append(rnd_txt())
-        r.append(random.randint(1,20))
-        r.append(random.random()*10)
-        r.append(WidgetedCell(ExampleWidgetForWidgetedCell))
-        df.append(r)
+    df = pandas.read_excel(r"C:\Users\Root\Desktop\Exampl.xlsx")
+    for i,row in df.iterrows():
+        df.at[i,"Объединить"] = WidgetedCell(ExampleWidgetForWidgetedCell)
 
-    df = pandas.DataFrame(df, columns=['AAA','BBB','CCC','DDD','EEE','FFF','GGG','HHH','III'])
     app = DataFrameApp(df)
     app.show()
     _app.exec_()

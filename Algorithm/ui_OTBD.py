@@ -3,7 +3,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
 import pandas as pd
-import Algorithm.sql_connect
+from Algorithm.proxy import DataFrameApp, WidgetedCell,ExampleWidgetForWidgetedCell,DataFrameWidget
+# import Algorithm.sql_connect
 
 class UI_OTBD(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -33,11 +34,12 @@ class UI_OTBD(QtWidgets.QMainWindow):
         self.tabWidget.addTab(self.Result, "")
         self.tab_2 = QtWidgets.QWidget()
         self.tab_2.setObjectName("tab_2")
-        self.tableView = QtWidgets.QTableView(self.tab_2)
-        self.tableView.setGeometry(QtCore.QRect(0, 0, 1411, 871))
-        self.tableView.setSortingEnabled(True)
-        self.tableView.setObjectName("tableView")
-        self.tableView.verticalHeader().setSortIndicatorShown(True)
+        self.tableView = DataFrameWidget()#QtWidgets.QTableView(self.tab_2)
+        # self.load_sites()
+        # self.tableView.setGeometry(QtCore.QRect(0, 0, 1411, 871))
+        # self.tableView.setSortingEnabled(True)
+        # self.tableView.setObjectName("tableView")
+        # self.tableView.verticalHeader().setSortIndicatorShown(True)
         self.pushButton = QtWidgets.QPushButton(self.tab_2)
         self.pushButton.setGeometry(QtCore.QRect(0, 880, 111, 23))
         self.pushButton.setObjectName("pushButton")
@@ -72,7 +74,6 @@ class UI_OTBD(QtWidgets.QMainWindow):
         self.gridLayout.addWidget(self.tabWidget, 0, 1, 1, 1)
         self.setCentralWidget(self.centralwidget)
 
-
         self.retranslateUi(UI_OTBD)
         self.tabWidget.setCurrentIndex(1)
 
@@ -95,6 +96,42 @@ class UI_OTBD(QtWidgets.QMainWindow):
         self.pushButton_4.setText(_translate("MainWindow", "Объединить строки"))
         self.pushButton_5.setText(_translate("MainWindow", "Снять флаги"))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Пользовательские списки"))
+
+    @QtCore.pyqtSlot()
+    def load_sites(self):
+        df=pd.read_excel(r"C:\Users\Root\Desktop\Projects\OTBD\Test_data\Шаблон.xlsx")
+        df = df.applymap(str)
+        df = df.fillna("")
+        for i, row in df.iterrows():
+            df.at[i, "Объединить"] = WidgetedCell(ExampleWidgetForWidgetedCell)
+
+        self.df = df
+        self.tableView._data_model.setDataFrame(df)
+
+
+    def form_tree(self,dataframe):
+            tree_level_inn = dataframe[(dataframe['Тип записи'] == "ЮЛ") & (dataframe['ИНН'].apply(lambda x: ~pd.isna(x))) & (dataframe['ОГРН'].apply(lambda x: ~pd.isna(x)))]
+            tree_level_no_inn = dataframe[(dataframe['Тип записи'] == "ЮЛ") & (dataframe['ИНН'].apply(lambda x: pd.isna(x))) & (dataframe['ОГРН'].apply(lambda x: pd.isna(x)))]
+            tree_level_inn_fl = dataframe[dataframe['Тип записи'] == "ФЛ"]
+            agg_cols = ['ИНН', 'ОГРН']
+            for i in agg_cols:
+                del dataframe[i]
+            tree_level_inn = tree_level_inn.groupby(agg_cols, as_index=False).agg(dataframe)
+
+    # @QtCore.pyqtSlot()
+    # def update_data(self):
+    #     df = pd.read_excel(r"C:\Users\Root\Desktop\Projects\OTBD\Test_data\Шаблон.xlsx")
+    #     df = df.applymap(str)
+    #     df = df.fillna("")
+    #
+    #     if self.comboBox.Currenttext() == "Xcomp":
+    #         for i, row in df.iterrows():
+    #             df.at[i, "Объединить"] = WidgetedCell(ExampleWidgetForWidgetedCell)
+    #         self.df = df
+    #         self.tableView._data_model.setDataFrame(self.df)
+    #     if self.comboBox.Currenttext() == "Test_1":
+    #         df_t = pd.DataFrame([],columns=list(df))
+    #         self.tableView._data_model.setDataFrame(df_t)
 
 class DataModel(QtCore.QAbstractTableModel):
     def __init__(self, df=pd.DataFrame(), parent=None):

@@ -4,7 +4,7 @@ from PyQt5.QtCore import pyqtSlot
 from Algorithm.ui_OTBD import UI_OTBD
 from Algorithm.ui_SOZ import MainWindow as UI_SOZ
 import sys
-import Algorithm.sql_connect
+# import Algorithm.sql_connect
 
 class Ui_MainWindow(object):
     def __init__(self):
