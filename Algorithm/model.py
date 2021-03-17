@@ -5,7 +5,7 @@ import pandas as pd
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.Qt import *
 from Algorithm.deduplication import deduplicate
-
+from Algorithm.db_connection import *
 class Delegate(QtWidgets.QStyledItemDelegate):
 
     def createEditor(self, parent, options, index):
@@ -50,6 +50,7 @@ class MyDelegateInTableView(QtWidgets.QWidget):
         self.table.viewport().installEventFilter(self)
         self.df = pd.DataFrame([], columns=[""])
 
+
     def load_table(self, path):
         self.data_model.removeColumns(0, self.data_model.columnCount())
 
@@ -66,6 +67,24 @@ class MyDelegateInTableView(QtWidgets.QWidget):
                 self.df['Объединить'] = "0"
                 self.df = self.df[list(self.df)[-1:] + list(self.df)[:-1]]
 
+
+        self.df = self.df.applymap(lambda x: QtGui.QStandardItem(str(x)))
+        for col in list(self.df):
+            self.data_model.appendColumn(self.df[col].tolist())
+        self.data_model.setHorizontalHeaderLabels(list(self.df))
+        return self.data_model
+
+    def load_table_sql(self,source):
+        self.data_model.removeColumns(0, self.data_model.columnCount())
+
+        connect = SqlModule()
+        self.df = connect.create_df(source)
+        self.df = self.df.fillna('')
+        self.df = self.df.applymap(lambda x: str(x).strip())
+        if "Объединить" not in list(self.df):
+            self.df['Объединить'] = "0"
+            self.df = self.df[list(self.df)[-1:] + list(self.df)[:-1]]
+        self.df = self.df.loc[:, ~self.df.columns.duplicated()]
 
         self.df = self.df.applymap(lambda x: QtGui.QStandardItem(str(x)))
         for col in list(self.df):

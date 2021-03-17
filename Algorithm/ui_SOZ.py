@@ -86,7 +86,6 @@ class MainWindow(QtWidgets.QMainWindow):
         for row in range(0, self.view.data_model.rowCount()):
             val_list = []
             for col in range(0, self.view.data_model.columnCount()):
-                if col in [2,4,5,7,8,10]:
                     val_list += [self.view.data_model.item(row,col).text()]
             self.connect_sql.add_record(val_list)
 

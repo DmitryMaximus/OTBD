@@ -2,15 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26ad4ba3-49f3-434a-8feb-414a36fb5055" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Algorithm/db_connection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithm/interface_ui/ui_EditCell.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithm/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Algorithm/tree_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/Deduplicate.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/proxy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/SanctionsDDL.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/SanctionsDDL.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/db_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/db_connection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/interface_ui/Test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/interface_ui/Test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/interface_ui/Test.ui" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/interface_ui/Test.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/ui_OTBD.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/ui_OTBD.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/ui_SOZ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/ui_SOZ.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/ui_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/ui_mainwindow.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,11 +41,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.ui_SOZ">
+  <component name="RunManager" selected="Python.tree_model">
     <configuration name="model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OTBD" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -66,27 +68,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="proxy" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="OTBD" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Algorithm" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/proxy.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="OTBD" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -100,6 +81,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="tree_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="OTBD" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Algorithm" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Algorithm/tree_model.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -152,11 +154,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.ui_SOZ" />
-        <item itemvalue="Python.model" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.proxy" />
         <item itemvalue="Python.ui_mainwindow" />
+        <item itemvalue="Python.tree_model" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.model" />
+        <item itemvalue="Python.ui_SOZ" />
       </list>
     </recent_temporary>
   </component>
@@ -182,10 +184,11 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1477" y="503" key="#com.intellij.fileTypes.FileTypeChooser/0.0.3440.1400@0.0.3440.1400" timestamp="1615654937392" />
-    <state x="772" y="803" width="793" height="563" key="#xdebugger.evaluate" timestamp="1615786273406">
+    <state x="935" y="797" width="793" height="563" key="#xdebugger.evaluate" timestamp="1615902767615">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="772" y="803" width="793" height="563" key="#xdebugger.evaluate/0.0.3440.1400@0.0.3440.1400" timestamp="1615786273406" />
+    <state x="935" y="797" width="793" height="563" key="#xdebugger.evaluate/0.0.3440.1400@0.0.3440.1400" timestamp="1615902767615" />
+    <state x="752" y="781" key="#xdebugger.evaluate/0.0.3440.1440@0.0.3440.1440" timestamp="1615893913997" />
     <state x="1813" y="100" width="1534" height="1207" key="DiffContextDialog" timestamp="1615242267047">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -194,47 +197,64 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1500" y="455" key="FileChooserDialogImpl/0.0.3440.1400@0.0.3440.1400" timestamp="1615550200360" />
-    <state width="1696" height="196" key="GridCell.Tab.0.bottom" timestamp="1615788013759">
+    <state width="1674" height="189" key="GridCell.Tab.0.bottom" timestamp="1615904074423">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="196" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615788013759" />
-    <state width="1696" height="196" key="GridCell.Tab.0.center" timestamp="1615788013759">
+    <state width="1664" height="196" key="GridCell.Tab.0.bottom/0.0.3376.1440@0.0.3376.1440" timestamp="1615809270377" />
+    <state width="1674" height="189" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615904074423" />
+    <state width="1696" height="196" key="GridCell.Tab.0.bottom/0.0.3440.1440@0.0.3440.1440" timestamp="1615896329557" />
+    <state width="1674" height="189" key="GridCell.Tab.0.center" timestamp="1615904074422">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="196" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615788013759" />
-    <state width="1696" height="196" key="GridCell.Tab.0.left" timestamp="1615788013759">
+    <state width="1664" height="196" key="GridCell.Tab.0.center/0.0.3376.1440@0.0.3376.1440" timestamp="1615809270377" />
+    <state width="1674" height="189" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615904074422" />
+    <state width="1696" height="196" key="GridCell.Tab.0.center/0.0.3440.1440@0.0.3440.1440" timestamp="1615896329557" />
+    <state width="1674" height="189" key="GridCell.Tab.0.left" timestamp="1615904074422">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="196" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615788013759" />
-    <state width="1696" height="196" key="GridCell.Tab.0.right" timestamp="1615788013759">
+    <state width="1664" height="196" key="GridCell.Tab.0.left/0.0.3376.1440@0.0.3376.1440" timestamp="1615809270377" />
+    <state width="1674" height="189" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615904074422" />
+    <state width="1696" height="196" key="GridCell.Tab.0.left/0.0.3440.1440@0.0.3440.1440" timestamp="1615896329557" />
+    <state width="1674" height="189" key="GridCell.Tab.0.right" timestamp="1615904074423">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="196" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615788013759" />
-    <state width="1696" height="196" key="GridCell.Tab.1.bottom" timestamp="1615788033654">
+    <state width="1664" height="196" key="GridCell.Tab.0.right/0.0.3376.1440@0.0.3376.1440" timestamp="1615809270377" />
+    <state width="1674" height="189" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615904074423" />
+    <state width="1696" height="196" key="GridCell.Tab.0.right/0.0.3440.1440@0.0.3440.1440" timestamp="1615896329557" />
+    <state width="1674" height="189" key="GridCell.Tab.1.bottom" timestamp="1615904074352">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="196" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615788033654" />
-    <state width="1696" height="196" key="GridCell.Tab.1.center" timestamp="1615788033654">
+    <state width="1664" height="196" key="GridCell.Tab.1.bottom/0.0.3376.1440@0.0.3376.1440" timestamp="1615809270325" />
+    <state width="1674" height="189" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1615904074352" />
+    <state width="1696" height="196" key="GridCell.Tab.1.bottom/0.0.3440.1440@0.0.3440.1440" timestamp="1615896329557" />
+    <state width="1674" height="189" key="GridCell.Tab.1.center" timestamp="1615904074352">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="196" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615788033654" />
-    <state width="1696" height="196" key="GridCell.Tab.1.left" timestamp="1615788033654">
+    <state width="1664" height="196" key="GridCell.Tab.1.center/0.0.3376.1440@0.0.3376.1440" timestamp="1615809270325" />
+    <state width="1674" height="189" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1615904074352" />
+    <state width="1696" height="196" key="GridCell.Tab.1.center/0.0.3440.1440@0.0.3440.1440" timestamp="1615896329557" />
+    <state width="1674" height="189" key="GridCell.Tab.1.left" timestamp="1615904074352">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="196" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615788033654" />
-    <state width="1696" height="196" key="GridCell.Tab.1.right" timestamp="1615788033654">
+    <state width="1664" height="196" key="GridCell.Tab.1.left/0.0.3376.1440@0.0.3376.1440" timestamp="1615809270325" />
+    <state width="1674" height="189" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1615904074352" />
+    <state width="1696" height="196" key="GridCell.Tab.1.left/0.0.3440.1440@0.0.3440.1440" timestamp="1615896329557" />
+    <state width="1674" height="189" key="GridCell.Tab.1.right" timestamp="1615904074352">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="196" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615788033654" />
+    <state width="1664" height="196" key="GridCell.Tab.1.right/0.0.3376.1440@0.0.3376.1440" timestamp="1615809270325" />
+    <state width="1674" height="189" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1615904074352" />
+    <state width="1696" height="196" key="GridCell.Tab.1.right/0.0.3440.1440@0.0.3440.1440" timestamp="1615896329557" />
     <state x="1221" y="342" key="SettingsEditor" timestamp="1615648685532">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1221" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1615648685532" />
     <state x="1221" y="382" key="SettingsEditor/0.40.3440.1400@0.40.3440.1400" timestamp="1615206378032" />
-    <state width="867" height="703" key="XDebugger.FullValuePopup" timestamp="1615755421148">
-      <screen x="0" y="0" width="3440" height="1400" />
+    <state width="867" height="724" key="XDebugger.FullValuePopup" timestamp="1615865513213">
+      <screen x="0" y="0" width="3440" height="1440" />
     </state>
     <state width="867" height="703" key="XDebugger.FullValuePopup/0.0.3440.1400@0.0.3440.1400" timestamp="1615755421148" />
+    <state width="867" height="724" key="XDebugger.FullValuePopup/0.0.3440.1440@0.0.3440.1440" timestamp="1615865513213" />
     <state x="-7" y="0" width="1734" height="1407" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1615732442500">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -243,10 +263,15 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1416" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1615721667623" />
-    <state x="2151" y="439" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1615740982836">
-      <screen x="0" y="0" width="3440" height="1400" />
+    <state x="2389" y="640" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1615893926354">
+      <screen x="0" y="0" width="3440" height="1440" />
+    </state>
+    <state x="2389" y="640" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1440@0.0.3440.1440" timestamp="1615893926354" />
+    <state x="2151" y="452" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1615893743887">
+      <screen x="0" y="0" width="3440" height="1440" />
     </state>
     <state x="2151" y="439" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.3440.1400@0.0.3440.1400" timestamp="1615740982836" />
+    <state x="2151" y="452" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.3440.1440@0.0.3440.1440" timestamp="1615893743887" />
     <state x="-7" y="0" width="1442" height="1162" key="dock-window-1" timestamp="1615772189185">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -255,18 +280,30 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="0" y="0" width="1501" height="1162" key="dock-window-2/0.0.3440.1400@0.0.3440.1400" timestamp="1615772239543" />
+    <state x="260" y="-22" width="1501" height="1202" maximized="true" key="dock-window-3" timestamp="1615873723249">
+      <screen x="0" y="0" width="3440" height="1440" />
+    </state>
+    <state x="260" y="-22" width="1501" height="1202" maximized="true" key="dock-window-3/0.0.3440.1440@0.0.3440.1440" timestamp="1615873723249" />
+    <state x="14" y="0" width="1501" height="1202" key="dock-window-4" timestamp="1615894343777">
+      <screen x="0" y="0" width="3440" height="1440" />
+    </state>
+    <state x="14" y="0" width="1501" height="1202" key="dock-window-4/0.0.3440.1440@0.0.3440.1440" timestamp="1615894343777" />
     <state x="2211" y="400" width="737" height="606" key="find.popup" timestamp="1615767059708">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2211" y="400" width="737" height="606" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1615767059708" />
+    <state x="2243" y="330" width="672" height="678" key="search.everywhere.popup" timestamp="1615865666981">
+      <screen x="0" y="0" width="3440" height="1440" />
+    </state>
+    <state x="2243" y="330" width="672" height="678" key="search.everywhere.popup/0.0.3440.1440@0.0.3440.1440" timestamp="1615865666981" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Algorithm/db_connection.py</url>
-          <line>42</line>
-          <option name="timeStamp" value="121" />
+          <url>file://$PROJECT_DIR$/Algorithm/tree_model.py</url>
+          <line>48</line>
+          <option name="timeStamp" value="154" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
