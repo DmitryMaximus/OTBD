@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="74c8faca-192e-4c17-8d18-0c93c6d3ef4a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Config_read.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/OTBD.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/OTBD.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SanctionsDDL.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SanctionsDDL.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_connection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deduplication.py" beforeDir="false" afterPath="$PROJECT_DIR$/deduplication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/123.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/Test.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/Test.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/ui_EditCell.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/ui_OTBD.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/ui_OTBD.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/ui_SOZ.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/ui_SOZ.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/ui_mainwindow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interface_ui/ui_mainwindow.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proxy.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/temp.xls" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tree_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tree_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_OTBD.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_OTBD.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_SOZ.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_SOZ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_mainwindow.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1qFXtVNcXZn10NTSt8pUficNxHk" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="74c8faca-192e-4c17-8d18-0c93c6d3ef4a" name="Default Changelist" comment="" />
+      <created>1616676526344</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616676526344</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2017" y="342" key="SettingsEditor" timestamp="1616676544599">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2017" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1616676544599" />
+    <state x="2147" y="397" width="737" height="606" key="find.popup" timestamp="1616676559065">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2147" y="397" width="737" height="606" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1616676559065" />
+  </component>
+</project>

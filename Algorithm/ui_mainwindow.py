@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import pyqtSlot
-from Algorithm.ui_OTBD import UI_OTBD
-from Algorithm.ui_SOZ import MainWindow as UI_SOZ
+from PyQt5 import QtCore, QtWidgets
+from ui_OTBD import UI_OTBD
+from ui_SOZ import MainWindow as UI_SOZ
 import sys
-import Algorithm.sql_connect
 
 class Ui_MainWindow(object):
     def __init__(self):
@@ -60,6 +58,16 @@ class Ui_MainWindow(object):
         sys.exit(self.app.exec_())
 
 if __name__ == "__main__":
-    ui = Ui_MainWindow()
-    ui.MainWindow.show()
-    ui.exit()
+    try:
+
+
+        ui = Ui_MainWindow()
+        ui.MainWindow.show()
+        ui.exit()
+    except Exception:
+        print(str(Exception))
+        print("В системе возникла ошибка, нажмите Enter для завершения")
+        input()
+
+
+

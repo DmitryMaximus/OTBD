@@ -1,173 +1,91 @@
-# -*- coding: utf-8 -*-
-
 from PyQt5 import QtCore, QtGui, QtWidgets
-import sys
+import sys, os, configparser
+from PyQt5 import QtCore, QtGui, QtWidgets
 import pandas as pd
-import Algorithm.sql_connect
+from model import *
+from tree_model import *
+from Config_read import confdict
 
 class UI_OTBD(QtWidgets.QMainWindow):
+    def __init__(self):
+        super().__init__()
+
+        self.x, self.y, self.w, self.h = 0, 0, 1200, 651
+        self.setGeometry(self.x, self.y, self.w, self.h)
+
+        self.window = MainWindow(self)
+        self.setCentralWidget(self.window)
+        self.setWindowTitle("Работа с ОТБД")
+        self.show()
+
+
+class GeneralWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
-        super(UI_OTBD, self).__init__(parent)
-        self.resize(1436, 1010)
-        self.centralwidget = QtWidgets.QWidget(self)
-        self.centralwidget.setObjectName("centralwidget")
-        self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
-        self.gridLayout.setObjectName("gridLayout")
-        self.tabWidget = QtWidgets.QTabWidget(self.centralwidget)
-        self.tabWidget.setObjectName("tabWidget")
-        self.Result = QtWidgets.QWidget()
-        self.Result.setObjectName("Result")
-        self.treeView = QtWidgets.QTreeView(self.Result)
-        self.treeView.setGeometry(QtCore.QRect(0, 0, 1411, 911))
-        self.treeView.setObjectName("treeView")
-        self.treeView.header().setSortIndicatorShown(True)
-        self.comboBox_3 = QtWidgets.QComboBox(self.Result)
-        self.comboBox_3.setGeometry(QtCore.QRect(1228, 919, 171, 22))
-        self.comboBox_3.setObjectName("comboBox_3")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.label_2 = QtWidgets.QLabel(self.Result)
-        self.label_2.setGeometry(QtCore.QRect(1100, 920, 121, 20))
-        self.label_2.setObjectName("label_2")
-        self.tabWidget.addTab(self.Result, "")
-        self.tab_2 = QtWidgets.QWidget()
-        self.tab_2.setObjectName("tab_2")
-        self.tableView = QtWidgets.QTableView(self.tab_2)
-        self.tableView.setGeometry(QtCore.QRect(0, 0, 1411, 871))
-        self.tableView.setSortingEnabled(True)
-        self.tableView.setObjectName("tableView")
-        self.tableView.verticalHeader().setSortIndicatorShown(True)
-        self.pushButton = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton.setGeometry(QtCore.QRect(0, 880, 111, 23))
-        self.pushButton.setObjectName("pushButton")
-        self.pushButton_2 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_2.setGeometry(QtCore.QRect(0, 910, 111, 23))
-        self.pushButton_2.setObjectName("pushButton_2")
-        self.comboBox = QtWidgets.QComboBox(self.tab_2)
-        self.comboBox.setGeometry(QtCore.QRect(1196, 880, 211, 22))
-        self.comboBox.setObjectName("comboBox")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.pushButton_3 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_3.setGeometry(QtCore.QRect(1070, 880, 111, 23))
-        self.pushButton_3.setObjectName("pushButton_3")
-        self.label = QtWidgets.QLabel(self.tab_2)
-        self.label.setGeometry(QtCore.QRect(140, 880, 101, 21))
-        self.label.setObjectName("label")
-        self.lineEdit = QtWidgets.QLineEdit(self.tab_2)
-        self.lineEdit.setGeometry(QtCore.QRect(250, 880, 391, 20))
-        self.lineEdit.setObjectName("lineEdit")
-        self.comboBox_2 = QtWidgets.QComboBox(self.tab_2)
-        self.comboBox_2.setGeometry(QtCore.QRect(650, 880, 151, 22))
-        self.comboBox_2.setObjectName("comboBox_2")
-        self.pushButton_4 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_4.setGeometry(QtCore.QRect(140, 910, 111, 23))
-        self.pushButton_4.setObjectName("pushButton_4")
-        self.pushButton_5 = QtWidgets.QPushButton(self.tab_2)
-        self.pushButton_5.setGeometry(QtCore.QRect(270, 910, 111, 23))
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.tabWidget.addTab(self.tab_2, "")
-        self.gridLayout.addWidget(self.tabWidget, 0, 1, 1, 1)
-        self.setCentralWidget(self.centralwidget)
+        super(GeneralWidget, self).__init__(parent)
+        lay = QtWidgets.QVBoxLayout(self)
+
+        self.tableView = MyDelegateInTableView()
+        self.tableView.setLayout(lay)
+        self.pushButton = QtWidgets.QPushButton("Отобразить список", clicked=self.__load_sql)
+        self.pushButton_1 = QtWidgets.QPushButton("Внести изменения в БД", clicked=self.__change_row)
+
+        self.comb_list = QtWidgets.QComboBox(self)
+        self.comb_list.addItem("X-com")
+        self.comb_list.addItem("AB")
+        self.comb_list.addItem("User")
+
+        lay.addWidget(self.tableView)
+        lay.addWidget(self.comb_list)
+        lay.addWidget(self.pushButton)
+        lay.addWidget(self.pushButton_1)
+
+    @QtCore.pyqtSlot()
+    def __load_sql(self):
+        self.tableView.load_table_sql(self.comb_list.currentText())
+    @QtCore.pyqtSlot()
+    def __change_row(self):
+        self.tableView._change_row()
+
+class OptionsWidget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(OptionsWidget, self).__init__(parent)
+        lay = QtWidgets.QVBoxLayout(self)
+        hlay = QtWidgets.QHBoxLayout()
+        lay.addLayout(hlay)
+        self.treeView = MyTree()
+
+        self.pushButton_2 = QtWidgets.QPushButton("Отобразить дерево", clicked = self.__populate_list)
+        self.pushButton_3 = QtWidgets.QPushButton("Выгрузить в формате SSW")
+        self.pushButton_4 = QtWidgets.QPushButton("Выгрузить в формате Excel")
+
+        self.priority = QtWidgets.QComboBox(self)
+        self.priority.addItem("X-com")
+        self.priority.addItem("AB")
+        self.priority.addItem("User")
+
+        lay.addWidget(self.treeView)
+        lay.addWidget(self.priority)
+        lay.addWidget(self.pushButton_2)
+        lay.addWidget(self.pushButton_3)
+
+    def __populate_list(self):
+        self.treeView.populate_list(self.priority.currentText())
+class MainWindow(QtWidgets.QWidget):
+    def __init__(self, parent):
+        super(MainWindow, self).__init__(parent)
+        layout = QtWidgets.QVBoxLayout(self)
+
+        tab_holder = QtWidgets.QTabWidget()
+        tab_1 = GeneralWidget()
+        tab_2 = OptionsWidget()
+        # Add tabs
+        tab_holder.addTab(tab_1, "Работа со списками")
+        tab_holder.addTab(tab_2, "Общий список")
+
+        layout.addWidget(tab_holder)
 
 
-        self.retranslateUi(UI_OTBD)
-        self.tabWidget.setCurrentIndex(1)
-
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        self.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.comboBox_3.setItemText(0, _translate("MainWindow", "Test_1"))
-        self.comboBox_3.setItemText(1, _translate("MainWindow", "Test_2"))
-        self.comboBox_3.setItemText(2, _translate("MainWindow", "Xcomp"))
-        self.label_2.setText(_translate("MainWindow", "Приоритетный список"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.Result), _translate("MainWindow", "Результирующая таблица"))
-        self.pushButton.setText(_translate("MainWindow", "Добавить строку"))
-        self.pushButton_2.setText(_translate("MainWindow", "Удалить строку"))
-        self.comboBox.setItemText(0, _translate("MainWindow", "Test_1"))
-        self.comboBox.setItemText(1, _translate("MainWindow", "Test_2"))
-        self.comboBox.setItemText(2, _translate("MainWindow", "Xcomp"))
-        self.pushButton_3.setText(_translate("MainWindow", "Отобразить список"))
-        self.label.setText(_translate("MainWindow", "Текстовый фильтр"))
-        self.pushButton_4.setText(_translate("MainWindow", "Объединить строки"))
-        self.pushButton_5.setText(_translate("MainWindow", "Снять флаги"))
-        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_2), _translate("MainWindow", "Пользовательские списки"))
-
-class DataModel(QtCore.QAbstractTableModel):
-    def __init__(self, df=pd.DataFrame(), parent=None):
-        QtCore.QAbstractTableModel.__init__(self, parent=parent)
-        self._df = df.copy()
-        self.bolds = dict()
-
-    def toDataFrame(self):
-        return self._df.copy()
-
-    def headerData(self, section, orientation, role=QtCore.Qt.DisplayRole):
-        if orientation == QtCore.Qt.Horizontal:
-            if role == QtCore.Qt.DisplayRole:
-                try:
-                    return self._df.columns.tolist()[section]
-                except (IndexError,):
-                    return QtCore.QVariant()
-            elif role == QtCore.Qt.FontRole:
-                return self.bolds.get(section, QtCore.QVariant())
-        elif orientation == QtCore.Qt.Vertical:
-            if role == QtCore.Qt.DisplayRole:
-                try:
-                    # return self.df.index.tolist()
-                    return self._df.index.tolist()[section]
-                except (IndexError,):
-                    return QtCore.QVariant()
-        return QtCore.QVariant()
-
-    def setFont(self, section, font):
-        self.bolds[section] = font
-        self.headerDataChanged.emit(QtCore.Qt.Horizontal, 0, self.columnCount())
-
-    def data(self, index, role=QtCore.Qt.DisplayRole):
-        if role != QtCore.Qt.DisplayRole:
-            return QtCore.QVariant()
-
-        if not index.isValid():
-            return QtCore.QVariant()
-
-        return QtCore.QVariant(str(self._df.iloc[index.row(), index.column()]))
-
-    def setData(self, index, value, role):
-        row = self._df.index[index.row()]
-        col = self._df.columns[index.column()]
-        if hasattr(value, 'toPyObject'):
-
-            value = value.toPyObject()
-        else:
-
-            dtype = self._df[col].dtype
-            if dtype != object:
-                value = None if value == '' else dtype.type(value)
-        self._df.set_value(row, col, value)
-        return True
-
-    def rowCount(self, parent=QtCore.QModelIndex()):
-        return len(self._df.index)
-
-    def columnCount(self, parent=QtCore.QModelIndex()):
-        return len(self._df.columns)
-
-    def sort(self, column, order):
-        colname = self._df.columns.tolist()[column]
-        self.layoutAboutToBeChanged.emit()
-        self._df.sort_values(colname, ascending=order == QtCore.Qt.AscendingOrder, inplace=True)
-        self._df.reset_index(inplace=True, drop=True)
-        self.layoutChanged.emit()
-
-if __name__ == "__main__":
-    import sys
-
+if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    main = UI_OTBD()
-    main.show()
-
+    ex = UI_OTBD()
     sys.exit(app.exec_())
