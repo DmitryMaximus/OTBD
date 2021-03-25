@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QFileDialog, QMessageBox
-import pandas as pd
-from Algorithm.model import *
-from Algorithm.db_connection import *
+from model import *
+from db_connection import *
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -88,7 +85,12 @@ class MainWindow(QtWidgets.QMainWindow):
             for col in range(0, self.view.data_model.columnCount()):
                     val_list += [self.view.data_model.item(row,col).text()]
             self.connect_sql.add_record(val_list)
-
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Загрузка данных в БД прошла успешно!")
+        msg.setWindowTitle("Загрузка данных в БД")
+        msg.setDetailedText("В базу было загружено "+str(self.view.data_model.rowCount())+" строк")
+        msg.exec_()
 
 if __name__ == "__main__":
     import sys

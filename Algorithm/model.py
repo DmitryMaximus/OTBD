@@ -1,11 +1,11 @@
 import sys
-import pyodbc
-from PyQt5.QtSql import QSqlDatabase, QSqlQuery
-import pandas as pd
+
 from PyQt5 import QtWidgets, QtGui, QtCore
 from PyQt5.Qt import *
-from Algorithm.deduplication import deduplicate
-from Algorithm.db_connection import *
+from deduplication import deduplicate
+from db_connection import *
+
+
 class Delegate(QtWidgets.QStyledItemDelegate):
 
     def createEditor(self, parent, options, index):
@@ -50,6 +50,14 @@ class MyDelegateInTableView(QtWidgets.QWidget):
         self.table.viewport().installEventFilter(self)
         self.df = pd.DataFrame([], columns=[""])
 
+        self.changed_items = []
+        self.data_model.itemChanged.connect(self.log_changed)
+
+        self.id_col_pos = 0  # Данный параметр необходим, что корректно учитывать в какой строке изменились данные и вносить в БД присвоение происходит в методе load_table_sql
+
+    def log_changed(self, item):
+
+        self.changed_items += [[self.data_model.item(item.row(), self.id_col_pos).text(), str(item.column()), item.text()]]  # [id_компании, Колонка с изменениями]
 
     def load_table(self, path):
         self.data_model.removeColumns(0, self.data_model.columnCount())
@@ -67,29 +75,36 @@ class MyDelegateInTableView(QtWidgets.QWidget):
                 self.df['Объединить'] = "0"
                 self.df = self.df[list(self.df)[-1:] + list(self.df)[:-1]]
 
-
         self.df = self.df.applymap(lambda x: QtGui.QStandardItem(str(x)))
         for col in list(self.df):
             self.data_model.appendColumn(self.df[col].tolist())
         self.data_model.setHorizontalHeaderLabels(list(self.df))
         return self.data_model
 
-    def load_table_sql(self,source):
+    def load_table_sql(self, source):
         self.data_model.removeColumns(0, self.data_model.columnCount())
 
         connect = SqlModule()
         self.df = connect.create_df(source)
-        self.df = self.df.fillna('')
-        self.df = self.df.applymap(lambda x: str(x).strip())
         if "Объединить" not in list(self.df):
             self.df['Объединить'] = "0"
             self.df = self.df[list(self.df)[-1:] + list(self.df)[:-1]]
         self.df = self.df.loc[:, ~self.df.columns.duplicated()]
 
-        self.df = self.df.applymap(lambda x: QtGui.QStandardItem(str(x)))
-        for col in list(self.df):
-            self.data_model.appendColumn(self.df[col].tolist())
-        self.data_model.setHorizontalHeaderLabels(list(self.df))
+        result_df = pd.DataFrame([], columns=list(confdict['COLUMNS'].values()))  # Используем вспомогательный df для замены названий колонок на человеческие и правильного порядка
+        for column in list(self.df):
+            if column in list(confdict['COLUMNS'].keys()):
+                result_df[confdict['COLUMNS'][column]] = self.df[column]
+
+        result_df = result_df.fillna('')
+        result_df = result_df.applymap(lambda x: str(x).strip())
+
+        self.id_col_pos = list(result_df).index("id")
+
+        result_df = result_df.applymap(lambda x: QtGui.QStandardItem(str(x)))
+        for col in list(result_df):
+            self.data_model.appendColumn(result_df[col].tolist())
+        self.data_model.setHorizontalHeaderLabels(list(result_df))
         return self.data_model
 
     def eventFilter(self, source, event):
@@ -136,7 +151,7 @@ class MyDelegateInTableView(QtWidgets.QWidget):
         if event.matches(QtGui.QKeySequence.Copy):
             self.copy()
         else:
-            # Pass up
+
             super(MyDelegateInTableView, self).keyPressEvent(event)
 
     def copy(self):
@@ -154,7 +169,7 @@ class MyDelegateInTableView(QtWidgets.QWidget):
             if item:
                 items.at[row, col] = str(str(item))
 
-        # Перевод в csv
+        # Перевод в csv для вывода в excel
         items = list(items.itertuples(index=False))
         s = '\n'.join(['\t'.join([str(cell) for cell in row]) for row in items])
 
@@ -170,29 +185,34 @@ class MyDelegateInTableView(QtWidgets.QWidget):
         #                                          ascending=Qt.AscendingOrder)
 
     def undo_flags(self):
-        for row in range(0,self.data_model.rowCount()):
-            self.data_model.item(row,0).setText(str("0"))
+        for row in range(0, self.data_model.rowCount()):
+            self.data_model.item(row, 0).setText(str("0"))
 
     def union_rows(self):
-        main_row_ind=None
-        ch_row_ind=[]
-        for row in range(0,self.data_model.rowCount()):
-            if self.data_model.item(row,0).text().lstrip()=="2":
+        main_row_ind = None
+        ch_row_ind = []
+        for row in range(0, self.data_model.rowCount()):
+            if self.data_model.item(row, 0).text().lstrip() == "2":
                 main_row_ind = row
-            elif self.data_model.item(row,0).text().lstrip()=="1":
+            elif self.data_model.item(row, 0).text().lstrip() == "1":
                 ch_row_ind.append(row)
-        if main_row_ind is not None and ch_row_ind!=[]:
+        if main_row_ind is not None and ch_row_ind != []:
             for col in [x for x in range(34, 55) if x not in [46, 47, 48]]:
-                current_val = self.data_model.item(main_row_ind,col).text()
+                current_val = self.data_model.item(main_row_ind, col).text()
                 for row in ch_row_ind:
-                    print(str(row)+"   "+str(col))
-                    ch_row_val = self.data_model.item(row,col).text() if not self.data_model.item(row,col).text() is None else ""
+                    print(str(row) + "   " + str(col))
+                    ch_row_val = self.data_model.item(row, col).text() if not self.data_model.item(row, col).text() is None else ""
                     if ch_row_val != "" and ch_row_val not in current_val:
-                        current_val +=  " | " + ch_row_val if current_val!= "" else ch_row_val
+                        current_val += " | " + ch_row_val if current_val != "" else ch_row_val
                 self.data_model.item(main_row_ind, col).setText(current_val)
         self.data_model.item(main_row_ind, 0).setText("0")
         for row in sorted(set(ch_row_ind), key=int, reverse=True):
             self.data_model.removeRow(row)
+
+    def _change_row(self):
+        connect=SqlModule()
+        for i in self.changed_items:
+            connect.change_row(i)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)

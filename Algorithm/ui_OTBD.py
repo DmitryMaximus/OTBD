@@ -2,9 +2,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 import sys, os, configparser
 from PyQt5 import QtCore, QtGui, QtWidgets
 import pandas as pd
-from Algorithm.model import *
-from Algorithm.tree_model import *
-
+from model import *
+from tree_model import *
+from Config_read import confdict
 
 class UI_OTBD(QtWidgets.QMainWindow):
     def __init__(self):
@@ -27,7 +27,7 @@ class GeneralWidget(QtWidgets.QWidget):
         self.tableView = MyDelegateInTableView()
         self.tableView.setLayout(lay)
         self.pushButton = QtWidgets.QPushButton("Отобразить список", clicked=self.__load_sql)
-        self.pushButton_1 = QtWidgets.QPushButton("Внести изменения в БД")
+        self.pushButton_1 = QtWidgets.QPushButton("Внести изменения в БД", clicked=self.__change_row)
 
         self.comb_list = QtWidgets.QComboBox(self)
         self.comb_list.addItem("X-com")
@@ -42,7 +42,9 @@ class GeneralWidget(QtWidgets.QWidget):
     @QtCore.pyqtSlot()
     def __load_sql(self):
         self.tableView.load_table_sql(self.comb_list.currentText())
-
+    @QtCore.pyqtSlot()
+    def __change_row(self):
+        self.tableView._change_row()
 
 class OptionsWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -52,7 +54,7 @@ class OptionsWidget(QtWidgets.QWidget):
         lay.addLayout(hlay)
         self.treeView = MyTree()
 
-        self.pushButton_2 = QtWidgets.QPushButton("Задать приоритет")
+        self.pushButton_2 = QtWidgets.QPushButton("Отобразить дерево", clicked = self.__populate_list)
         self.pushButton_3 = QtWidgets.QPushButton("Выгрузить в формате SSW")
         self.pushButton_4 = QtWidgets.QPushButton("Выгрузить в формате Excel")
 
@@ -66,7 +68,8 @@ class OptionsWidget(QtWidgets.QWidget):
         lay.addWidget(self.pushButton_2)
         lay.addWidget(self.pushButton_3)
 
-
+    def __populate_list(self):
+        self.treeView.populate_list(self.priority.currentText())
 class MainWindow(QtWidgets.QWidget):
     def __init__(self, parent):
         super(MainWindow, self).__init__(parent)

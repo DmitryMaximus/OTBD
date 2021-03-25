@@ -2,13 +2,15 @@ use Sanctions;
 
 drop table if exists Sanctions;
 drop table if exists alternative_names;
-drop table if exists Companies;
-drop table if exists Records;
-drop table if exists Users;
 drop table if exists SSW_lists;
-drop table if exists Sources;
 drop table if exists unstructured_names;
 drop table if exists Connections;
+drop table if exists Companies;
+drop table if exists Records;
+drop table if exists Sources;
+drop table if exists Users;
+
+
 
 create table Sources(
 	id int primary key identity(1,1),
@@ -73,6 +75,7 @@ create table Connections(
 		id int primary key identity(1,1),
 	main_company int,
 	child_company int,
+	mode int,
 	foreign key (main_company) references Companies(id)  ON DELETE CASCADE
 
 );
@@ -96,7 +99,7 @@ create table alternative_names (
 	id int primary key identity(1,1),
 	name nvarchar(max) not null,
 	company int not null,
-	is_active bit not null default 1,
+	is_active_naming bit not null default 1,
 	foreign key (company) references Companies(id)  ON DELETE CASCADE
 );
 create table unstructured_names (

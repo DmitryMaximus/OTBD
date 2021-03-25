@@ -94,9 +94,9 @@ def deduplicate(input):
                                      & (dataframe['Наименование(главное рус)'] == row['Наименование(главное рус)'])
                                      & (row['ОГРН'] == "")].index.values)
 
-            elif len(dataframe[(row['ИНН'] == "") & (row['Тип записи'] == 'ЮЛ')
-                               & (dataframe['ОГРН'] == row['ОГРН'])].index) > 1:
-                idx = list(dataframe[(dataframe['ИНН'] == row['ИНН']) & (row['Тип записи'] == 'ЮЛ')
+            elif len(dataframe[(row['ИНН'] == "") & (row['ОГРН'] == "") & (row['Тип записи'] == 'ЮЛ')
+                               & (dataframe['Наименование(главное рус)'] == row['Наименование(главное рус)']) ].index) > 1:
+                idx = list(dataframe[(dataframe['ИНН'] == "") & (row['Тип записи'] == 'ЮЛ')
                                      & (dataframe['Наименование(главное рус)'] == row['Наименование(главное рус)'])
                                      & (row['ОГРН'] == "")].index.values)
 
@@ -113,7 +113,8 @@ def deduplicate(input):
                     counter += 1
                     for ind in idx:
                         dataframe.drop(ind, inplace=True)
-
+            else:
+                resulting_df.loc[counter] = row
     resulting_df["Коды санкционных ограничений"] = resulting_df["Коды санкционных ограничений"].apply(lambda x: ','.join(set([i.lstrip() for i in x.split(',')])))
 
     return resulting_df
