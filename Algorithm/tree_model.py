@@ -25,6 +25,7 @@ class MyTree(QDialog):
         self.treeView.customContextMenuRequested.connect(self.generateMenu)
         self.treeView.viewport().installEventFilter(self)
         self.link_wind = LinkWindow()
+        self.model=None
 
     def load_table_sql(self, source):
 
@@ -151,7 +152,9 @@ class MyTree(QDialog):
             if row['id'] not in comp_id_list:
                 model.appendRow(row.apply(lambda x: QtGui.QStandardItem(x)).values)
 
+        self.model = model
         self.treeView.setModel(model)
+        return model
 
     def remove_row(self, q_point):
         buttonReply = QMessageBox.question(self, 'Подтверждение удаления', "Вы действительно хотите удалить запись?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
@@ -166,12 +169,14 @@ class MyTree(QDialog):
             self.menu = QMenu(self)
             pos = event.globalPos()
 
-            # sort = self.menu.addAction('Отсортировать')
-            # sort.triggered.connect(
-            #     lambda: self.sort(pos))
-
-            removeRow = self.menu.addAction('Объеденить\\Разъеденить')
+            removeRow = self.menu.addAction('Объединить\\Разъединить')
             removeRow.triggered.connect(self.create_con)
+
+            collapse = self.menu.addAction('Скрыть все строки')
+            collapse.triggered.connect(self.collapse)
+
+            un_collapse = self.menu.addAction('Раскрыть все строки')
+            un_collapse.triggered.connect(self.un_collapse)
 
             self.menu.popup(pos)
         return super(MyTree, self).eventFilter(source, event)
@@ -182,6 +187,11 @@ class MyTree(QDialog):
     def create_con(self):
         self.link_wind.centralwidget.show()
 
+    def collapse(self):
+        self.treeView.collapseAll()
+
+    def un_collapse(self):
+        self.treeView.expandAll()
 
 
 if __name__ == "__main__":

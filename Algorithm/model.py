@@ -57,7 +57,7 @@ class MyDelegateInTableView(QtWidgets.QWidget):
 
     def log_changed(self, item):
 
-        self.changed_items += [[self.data_model.item(item.row(), self.id_col_pos).text(), str(item.column()), item.text()]]  # [id_компании, Колонка с изменениями]
+            self.changed_items += [[self.data_model.item(item.row(), self.id_col_pos).text(), str(item.column()), item.text()]]
 
     def load_table(self, path):
         self.data_model.removeColumns(0, self.data_model.columnCount())
@@ -67,7 +67,7 @@ class MyDelegateInTableView(QtWidgets.QWidget):
         if ".XML" in path or ".xml" in path:
             return
         if ".xlsx" in path:
-            self.df = pd.read_excel(path)
+            self.df = pd.read_excel(path,dtype=str)
             self.df = self.df.fillna('')
             self.df = self.df.applymap(lambda x: str(x).strip())
             self.df = deduplicate(self.df)
@@ -118,9 +118,9 @@ class MyDelegateInTableView(QtWidgets.QWidget):
             addRow.triggered.connect(
                 lambda: self.add_row())
 
-            sort = self.menu.addAction('Отсортировать')
-            sort.triggered.connect(
-                lambda: self.sort(pos))
+            # sort = self.menu.addAction('Отсортировать')
+            # sort.triggered.connect(
+            #     lambda: self.sort(pos))
 
             removeRow = self.menu.addAction('Удалить')
             removeRow.triggered.connect(
@@ -136,13 +136,17 @@ class MyDelegateInTableView(QtWidgets.QWidget):
     def add_row(self):
         empty_l = []
         for col in list(self.df):
-            empty_l += ""
+            if col == "id":
+                empty_l += [QStandardItem(str(self.df["id"].max()+1))]
+            else:
+                empty_l += [QStandardItem("")]
         self.data_model.appendRow(empty_l)
 
     def remove_row_from_rigth_click(self, q_point):
         buttonReply = QMessageBox.question(self, 'Подтверждение удаления', "Вы действительно хотите удалить запись?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if buttonReply == QMessageBox.Yes:
             row = self.table.rowAt(self.table.viewport().mapFromGlobal(q_point).y())
+            self.changed_items += [[self.data_model.item(row, self.id_col_pos).text(), str(0), 0]]
             self.data_model.removeRow(row)
         else:
             pass
@@ -212,7 +216,10 @@ class MyDelegateInTableView(QtWidgets.QWidget):
     def _change_row(self):
         connect=SqlModule()
         for i in self.changed_items:
-            connect.change_row(i)
+            if i[1]=='0' and i[2]==0:
+                connect.remove_row(i[0])
+            else:
+                connect.change_row(i)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
