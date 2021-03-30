@@ -2,36 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74c8faca-192e-4c17-8d18-0c93c6d3ef4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Config_read.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/OTBD.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/OTBD.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SanctionsDDL.sql" beforeDir="false" afterPath="$PROJECT_DIR$/SanctionsDDL.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SSW.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/db_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_connection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/deduplication.py" beforeDir="false" afterPath="$PROJECT_DIR$/deduplication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/123.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/Test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/Test.ui" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/ui_EditCell.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/ui_OTBD.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/ui_OTBD.ui" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/ui_SOZ.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/ui_SOZ.ui" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/ui_mainwindow.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/interface_ui/ui_mainwindow.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/link_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/link_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proxy.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.xls" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/tree_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tree_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui_OTBD.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_OTBD.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui_SOZ.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_SOZ.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_mainwindow.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -48,6 +39,34 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
+  <component name="RunManager">
+    <configuration name="ui_mainwindow" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Algorithm" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui_mainwindow.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.ui_mainwindow" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -62,13 +81,100 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="905" y="757" key="#xdebugger.evaluate" timestamp="1616971778869">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="905" y="757" key="#xdebugger.evaluate/0.0.3440.1400@0.0.3440.1400" timestamp="1616971778869" />
+    <state width="1696" height="425" key="GridCell.Tab.0.bottom" timestamp="1617090699326">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1696" height="425" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699326" />
+    <state width="1696" height="425" key="GridCell.Tab.0.center" timestamp="1617090699326">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1696" height="425" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699326" />
+    <state width="1696" height="425" key="GridCell.Tab.0.left" timestamp="1617090699325">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1696" height="425" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699325" />
+    <state width="1696" height="425" key="GridCell.Tab.0.right" timestamp="1617090699326">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1696" height="425" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699326" />
+    <state width="1696" height="425" key="GridCell.Tab.1.bottom" timestamp="1617090699255">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1696" height="425" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699255" />
+    <state width="1696" height="425" key="GridCell.Tab.1.center" timestamp="1617090699255">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1696" height="425" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699255" />
+    <state width="1696" height="425" key="GridCell.Tab.1.left" timestamp="1617090699255">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1696" height="425" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699255" />
+    <state width="1696" height="425" key="GridCell.Tab.1.right" timestamp="1617090699255">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state width="1696" height="425" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699255" />
     <state x="2017" y="342" key="SettingsEditor" timestamp="1616676544599">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2017" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1616676544599" />
-    <state x="2147" y="397" width="737" height="606" key="find.popup" timestamp="1616676559065">
+    <state x="2212" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1617085353986">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2147" y="397" width="737" height="606" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1616676559065" />
+    <state x="2212" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1617085353986" />
+    <state x="1713" y="0" width="1734" height="1407" key="dock-window-1" timestamp="1617087929207">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="1713" y="0" width="1734" height="1407" key="dock-window-1/0.0.3440.1400@0.0.3440.1400" timestamp="1617087929207" />
+    <state x="2147" y="398" width="737" height="606" key="find.popup" timestamp="1617023649724">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="2147" y="398" width="737" height="606" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1617023649724" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/model.py</url>
+          <line>59</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/db_connection.py</url>
+          <line>38</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SSW.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SSW.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ui_OTBD.py</url>
+          <line>71</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SSW.py</url>
+          <line>4</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

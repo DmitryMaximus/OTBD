@@ -1,10 +1,6 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-import sys, os, configparser
-from PyQt5 import QtCore, QtGui, QtWidgets
-import pandas as pd
 from model import *
 from tree_model import *
-from Config_read import confdict
+from SSW import create_ssw
 
 class UI_OTBD(QtWidgets.QMainWindow):
     def __init__(self):
@@ -15,7 +11,7 @@ class UI_OTBD(QtWidgets.QMainWindow):
 
         self.window = MainWindow(self)
         self.setCentralWidget(self.window)
-        self.setWindowTitle("Работа с ОТБД")
+        self.setWindowTitle("Работа с ЭТБД")
         self.show()
 
 
@@ -33,6 +29,8 @@ class GeneralWidget(QtWidgets.QWidget):
         self.comb_list.addItem("X-com")
         self.comb_list.addItem("AB")
         self.comb_list.addItem("User")
+
+        self.treemodel = None
 
         lay.addWidget(self.tableView)
         lay.addWidget(self.comb_list)
@@ -55,7 +53,7 @@ class OptionsWidget(QtWidgets.QWidget):
         self.treeView = MyTree()
 
         self.pushButton_2 = QtWidgets.QPushButton("Отобразить дерево", clicked = self.__populate_list)
-        self.pushButton_3 = QtWidgets.QPushButton("Выгрузить в формате SSW")
+        self.pushButton_3 = QtWidgets.QPushButton("Выгрузить в формате SSW", clicked = self.__create_SSW)
         self.pushButton_4 = QtWidgets.QPushButton("Выгрузить в формате Excel")
 
         self.priority = QtWidgets.QComboBox(self)
@@ -69,7 +67,9 @@ class OptionsWidget(QtWidgets.QWidget):
         lay.addWidget(self.pushButton_3)
 
     def __populate_list(self):
-        self.treeView.populate_list(self.priority.currentText())
+        self.treemodel = self.treeView.populate_list(self.priority.currentText())
+    def __create_SSW(self):
+        create_ssw(self.treemodel)
 class MainWindow(QtWidgets.QWidget):
     def __init__(self, parent):
         super(MainWindow, self).__init__(parent)

@@ -115,6 +115,7 @@ def deduplicate(input):
                         dataframe.drop(ind, inplace=True)
             else:
                 resulting_df.loc[counter] = row
+                counter += 1
     resulting_df["Коды санкционных ограничений"] = resulting_df["Коды санкционных ограничений"].apply(lambda x: ','.join(set([i.lstrip() for i in x.split(',')])))
 
     return resulting_df

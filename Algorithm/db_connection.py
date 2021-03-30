@@ -36,7 +36,7 @@ class SqlModule(object):
 
     def convert_date(self, date):
         if date != '' and date != None:
-            date = datetime.datetime.strptime(date, '%Y-%m-%d')
+            date = datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
 
         else:
             date = 'NULL'
@@ -182,3 +182,9 @@ class SqlModule(object):
         self.curs.execute(sql)
         self.sql_conn.commit()
         return self.curs.fetchall()
+
+    def remove_row(self,row):
+        data = (row)
+        sql = "DELETE Records FROM Records LEFT JOIN Companies ON Records.id = Companies.record WHERE Companies.id = %s" % data
+        self.curs.execute(sql)
+        self.sql_conn.commit()
