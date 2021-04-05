@@ -1,6 +1,6 @@
 from model import *
 from tree_model import *
-from SSW import create_ssw
+from Export import create_ssw, create_excel
 
 class UI_OTBD(QtWidgets.QMainWindow):
     def __init__(self):
@@ -54,7 +54,7 @@ class OptionsWidget(QtWidgets.QWidget):
 
         self.pushButton_2 = QtWidgets.QPushButton("Отобразить дерево", clicked = self.__populate_list)
         self.pushButton_3 = QtWidgets.QPushButton("Выгрузить в формате SSW", clicked = self.__create_SSW)
-        self.pushButton_4 = QtWidgets.QPushButton("Выгрузить в формате Excel")
+        self.pushButton_4 = QtWidgets.QPushButton("Выгрузить в формате Excel",clicked = self.__create_excel)
 
         self.priority = QtWidgets.QComboBox(self)
         self.priority.addItem("X-com")
@@ -65,11 +65,16 @@ class OptionsWidget(QtWidgets.QWidget):
         lay.addWidget(self.priority)
         lay.addWidget(self.pushButton_2)
         lay.addWidget(self.pushButton_3)
-
+        lay.addWidget(self.pushButton_4)
     def __populate_list(self):
         self.treemodel = self.treeView.populate_list(self.priority.currentText())
     def __create_SSW(self):
-        create_ssw(self.treemodel)
+        path_to_save = QFileDialog.getExistingDirectory()[0]
+        create_ssw(self.treemodel,path_to_save)
+    def __create_excel(self):
+        path_to_save = QFileDialog.getExistingDirectory()[0]
+        create_excel(self.treemodel,path_to_save)
+
 class MainWindow(QtWidgets.QWidget):
     def __init__(self, parent):
         super(MainWindow, self).__init__(parent)

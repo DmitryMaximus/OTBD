@@ -102,9 +102,8 @@ def deduplicate(input):
 
             elif len(dataframe[(row['ИНН'] == "") & (row['Тип записи'] == 'ФЛ')& (row['Дата рождения'] != "")
                                & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index) > 1:
-                idx = list(dataframe[(dataframe['ИНН'] == row['ИНН']) & (row['Тип записи'] == 'ЮЛ')
-                                     & (dataframe['Наименование(главное рус)'] == row['Наименование(главное рус)'])
-                                     & (row['ОГРН'] == "")].index.values)
+                idx = list(dataframe[(dataframe['ИНН'] == "") & (row['Тип записи'] == 'ФЛ')
+                                     & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index.values)
 
             if idx != []:
                 row_c = combine_row(dataframe, idx)
