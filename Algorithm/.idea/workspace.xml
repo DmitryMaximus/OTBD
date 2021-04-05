@@ -2,15 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="74c8faca-192e-4c17-8d18-0c93c6d3ef4a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/SSW.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/db_connection.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SSW.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/deduplication.py" beforeDir="false" afterPath="$PROJECT_DIR$/deduplication.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/link_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/link_window.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tree_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/tree_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui_OTBD.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_OTBD.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_mainwindow.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,50 +81,54 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="905" y="757" key="#xdebugger.evaluate/0.0.3440.1400@0.0.3440.1400" timestamp="1616971778869" />
-    <state width="1696" height="425" key="GridCell.Tab.0.bottom" timestamp="1617090699326">
+    <state width="1696" height="422" key="GridCell.Tab.0.bottom" timestamp="1617379305003">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="425" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699326" />
-    <state width="1696" height="425" key="GridCell.Tab.0.center" timestamp="1617090699326">
+    <state width="1696" height="422" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1617379305003" />
+    <state width="1696" height="422" key="GridCell.Tab.0.center" timestamp="1617379305003">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="425" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699326" />
-    <state width="1696" height="425" key="GridCell.Tab.0.left" timestamp="1617090699325">
+    <state width="1696" height="422" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1617379305003" />
+    <state width="1696" height="422" key="GridCell.Tab.0.left" timestamp="1617379305002">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="425" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699325" />
-    <state width="1696" height="425" key="GridCell.Tab.0.right" timestamp="1617090699326">
+    <state width="1696" height="422" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1617379305002" />
+    <state width="1696" height="422" key="GridCell.Tab.0.right" timestamp="1617379305003">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="425" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699326" />
-    <state width="1696" height="425" key="GridCell.Tab.1.bottom" timestamp="1617090699255">
+    <state width="1696" height="422" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1617379305003" />
+    <state width="1696" height="422" key="GridCell.Tab.1.bottom" timestamp="1617379305003">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="425" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699255" />
-    <state width="1696" height="425" key="GridCell.Tab.1.center" timestamp="1617090699255">
+    <state width="1696" height="422" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1617379305003" />
+    <state width="1696" height="422" key="GridCell.Tab.1.center" timestamp="1617379305003">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="425" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699255" />
-    <state width="1696" height="425" key="GridCell.Tab.1.left" timestamp="1617090699255">
+    <state width="1696" height="422" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1617379305003" />
+    <state width="1696" height="422" key="GridCell.Tab.1.left" timestamp="1617379305003">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="425" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699255" />
-    <state width="1696" height="425" key="GridCell.Tab.1.right" timestamp="1617090699255">
+    <state width="1696" height="422" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1617379305003" />
+    <state width="1696" height="422" key="GridCell.Tab.1.right" timestamp="1617379305003">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="425" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1617090699255" />
+    <state width="1696" height="422" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1617379305003" />
     <state x="2017" y="342" key="SettingsEditor" timestamp="1616676544599">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2017" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1616676544599" />
-    <state x="2212" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1617085353986">
+    <state x="2212" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1617348020308">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2212" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1617085353986" />
+    <state x="2212" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1617348020308" />
     <state x="1713" y="0" width="1734" height="1407" key="dock-window-1" timestamp="1617087929207">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="1713" y="0" width="1734" height="1407" key="dock-window-1/0.0.3440.1400@0.0.3440.1400" timestamp="1617087929207" />
+    <state x="-7" y="0" width="1734" height="1407" key="dock-window-2" timestamp="1617118575631">
+      <screen x="0" y="0" width="3440" height="1400" />
+    </state>
+    <state x="-7" y="0" width="1734" height="1407" key="dock-window-2/0.0.3440.1400@0.0.3440.1400" timestamp="1617118575631" />
     <state x="2147" y="398" width="737" height="606" key="find.popup" timestamp="1617023649724">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
@@ -146,26 +146,6 @@
           <url>file://$PROJECT_DIR$/db_connection.py</url>
           <line>38</line>
           <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SSW.py</url>
-          <line>3</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SSW.py</url>
-          <line>2</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/ui_OTBD.py</url>
-          <line>71</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/SSW.py</url>
-          <line>4</line>
-          <option name="timeStamp" value="11" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

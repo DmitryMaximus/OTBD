@@ -45,7 +45,6 @@ class Ui_MainWindow(object):
         self.ui_OTBD = UI_OTBD()
         self.ui_OTBD.show()
 
-
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Меню"))
@@ -59,8 +58,6 @@ class Ui_MainWindow(object):
 
 if __name__ == "__main__":
     try:
-
-
         ui = Ui_MainWindow()
         ui.MainWindow.show()
         ui.exit()
