@@ -2,5 +2,5 @@ import configparser
 import os
 
 config = configparser.ConfigParser()
-config.read(os.getcwd()+"\config.ini",encoding='utf-8')
+config.read(os.path.dirname(os.path.realpath(__file__))+"\config.ini",encoding='utf-8')
 confdict = {section: dict(config.items(section)) for section in config.sections()}

@@ -1,6 +1,8 @@
 from model import *
 from tree_model import *
-from Export import create_ssw, create_excel
+from delta import *
+from Export import *
+from proxy import *
 
 class UI_OTBD(QtWidgets.QMainWindow):
     def __init__(self):
@@ -24,11 +26,12 @@ class GeneralWidget(QtWidgets.QWidget):
         self.tableView.setLayout(lay)
         self.pushButton = QtWidgets.QPushButton("Отобразить список", clicked=self.__load_sql)
         self.pushButton_1 = QtWidgets.QPushButton("Внести изменения в БД", clicked=self.__change_row)
-
+        self.pushButton_2 = QtWidgets.QPushButton("Выгрузить в Excel", clicked=self.__export_excel)
         self.comb_list = QtWidgets.QComboBox(self)
         self.comb_list.addItem("X-com")
         self.comb_list.addItem("AB")
         self.comb_list.addItem("User")
+        self.comb_list.addItem("TR санкции")
 
         self.treemodel = None
 
@@ -36,13 +39,29 @@ class GeneralWidget(QtWidgets.QWidget):
         lay.addWidget(self.comb_list)
         lay.addWidget(self.pushButton)
         lay.addWidget(self.pushButton_1)
-
+        lay.addWidget(self.pushButton_2)
     @QtCore.pyqtSlot()
     def __load_sql(self):
         self.tableView.load_table_sql(self.comb_list.currentText())
     @QtCore.pyqtSlot()
     def __change_row(self):
         self.tableView._change_row()
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Данные успешно изменены в БД")
+        msg.setWindowTitle("Изменение данных в БД")
+        msg.exec_()
+
+
+    def __export_excel(self):
+
+        path_to_save = QFileDialog.getExistingDirectory()
+        export_excel(self.tableView.data_model, path_to_save)
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Данные успешно выгружены в Excel")
+        msg.setWindowTitle("Выгрузка")
+        msg.exec_()
 
 class OptionsWidget(QtWidgets.QWidget):
     def __init__(self, parent=None):
@@ -53,8 +72,8 @@ class OptionsWidget(QtWidgets.QWidget):
         self.treeView = MyTree()
 
         self.pushButton_2 = QtWidgets.QPushButton("Отобразить дерево", clicked = self.__populate_list)
-        self.pushButton_3 = QtWidgets.QPushButton("Выгрузить в формате SSW", clicked = self.__create_SSW)
-        self.pushButton_4 = QtWidgets.QPushButton("Выгрузить в формате Excel",clicked = self.__create_excel)
+        self.pushButton_4 = QtWidgets.QPushButton("Выгрузка дельты",clicked = self.__create_delta)
+        self.pushButton_5 = QtWidgets.QPushButton("Выгрузка Excel",clicked = self.__export_excel_tree)
 
         self.priority = QtWidgets.QComboBox(self)
         self.priority.addItem("X-com")
@@ -64,16 +83,83 @@ class OptionsWidget(QtWidgets.QWidget):
         lay.addWidget(self.treeView)
         lay.addWidget(self.priority)
         lay.addWidget(self.pushButton_2)
-        lay.addWidget(self.pushButton_3)
+        # lay.addWidget(self.pushButton_3)
         lay.addWidget(self.pushButton_4)
+        lay.addWidget(self.pushButton_5)
+
     def __populate_list(self):
         self.treemodel = self.treeView.populate_list(self.priority.currentText())
-    def __create_SSW(self):
-        path_to_save = QFileDialog.getExistingDirectory()[0]
-        create_ssw(self.treemodel,path_to_save)
-    def __create_excel(self):
-        path_to_save = QFileDialog.getExistingDirectory()[0]
-        create_excel(self.treemodel,path_to_save)
+        df = aggregation(self.treemodel).fillna("")
+        df = df.applymap(str)
+        df = df.fillna("")
+        df.to_excel(os.path.dirname(os.path.abspath(__file__)) + "\data_temp.xlsx",index=False)
+
+    def __create_delta(self):
+
+        path_to_save = QFileDialog.getExistingDirectory()
+        create_delta(self.treemodel,path_to_save)
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Дельта успешно выгружена")
+        msg.setWindowTitle("Выгрузка дельты")
+        msg.exec_()
+
+    def __export_excel_tree(self):
+        path_to_save = QFileDialog.getExistingDirectory()
+        export_excel_tree(self.treemodel, path_to_save)
+        msg = QMessageBox()
+        msg.setIcon(QMessageBox.Information)
+        msg.setText("Данные успешно выгружены в Excel")
+        msg.setWindowTitle("Выгрузка")
+        msg.exec_()
+
+class UnionWidget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(UnionWidget, self).__init__(parent)
+        lay = QtWidgets.QVBoxLayout(self)
+        hlay = QtWidgets.QHBoxLayout()
+        lay.addLayout(hlay)
+        self.show_df = QtWidgets.QPushButton("Отобразить данные", clicked=self.shot_union)
+        self.tableView = DataFrameWidget()
+        lay.addWidget(self.tableView)
+        lay.addWidget(self.show_df)
+    def shot_union(self):
+        try:
+            df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + "\data_temp.xlsx")
+            self.tableView.setDataFrame(df)
+        except:
+            pass
+
+class SettingWidget(QtWidgets.QWidget):
+    def __init__(self, parent=None):
+        super(SettingWidget, self).__init__(parent)
+        lay = QtWidgets.QVBoxLayout(self)
+
+        self.pushButton_2 = QtWidgets.QPushButton("Обновить данные", clicked=self.__update_data)
+        self.tableView = MyDelegateInTableView()
+        self.tableView.setLayout(lay)
+        self.__load_keys()
+
+        lay.addWidget(self.tableView)
+        lay.addWidget(self.pushButton_2)
+
+    def __load_keys(self):
+        self.tableView._load_keys()
+
+    @QtCore.pyqtSlot()
+    def __update_data(self):
+        data = []
+        for row in range(0, self.tableView.data_model.rowCount()):
+            row_val_list = []
+            for col in range(0, self.tableView.data_model.columnCount()):
+                row_val_list += [self.tableView.data_model.item(row, col).text()]
+            if row_val_list[0] in set([i[0] for i in self.tableView.changed_items]):
+                data += [row_val_list]
+
+        for elem in self.tableView.changed_items:
+            if elem[1] == '0' and elem[2]==0:
+                data+=[[elem[0]]]
+        self.tableView._update_keys(data)
 
 class MainWindow(QtWidgets.QWidget):
     def __init__(self, parent):
@@ -81,11 +167,10 @@ class MainWindow(QtWidgets.QWidget):
         layout = QtWidgets.QVBoxLayout(self)
 
         tab_holder = QtWidgets.QTabWidget()
-        tab_1 = GeneralWidget()
-        tab_2 = OptionsWidget()
-        # Add tabs
-        tab_holder.addTab(tab_1, "Работа со списками")
-        tab_holder.addTab(tab_2, "Общий список")
+        tab_holder.addTab(GeneralWidget(), "Работа со списками")
+        tab_holder.addTab(OptionsWidget(), "Общий список")
+        tab_holder.addTab(UnionWidget(), "Объединенное представление")
+        tab_holder.addTab(SettingWidget(), "Ключевые слова рефенитив")
 
         layout.addWidget(tab_holder)
 

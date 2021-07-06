@@ -1,10 +1,7 @@
-import sys
 from PyQt5.QtWidgets import QDialog, QApplication,QAbstractItemView
 from PyQt5.QtGui import QStandardItemModel
 from PyQt5.QtCore import Qt
 from PyQt5 import QtCore, QtGui, QtWidgets
-from db_connection import *
-from Config_read import confdict
 from PyQt5.Qt import QMessageBox, QMenu
 from link_window import *
 
@@ -54,13 +51,8 @@ class MyTree(QDialog):
         for i, row in df_p.iterrows():
             # Совпадение ИНН + ОГРН непуст
             result_list = []
-            mask = (df_ch['ИНН'] != "") & (df_ch['ОГРН'] != "") & (df_ch['ИНН'] == row['ИНН']) & (df_ch['ОГРН'] == row['ОГРН']) & (df_ch['Тип записи'] == "0")
+            mask = (df_ch['ИНН'] != "") & (df_ch['ИНН'] == row['ИНН'])  & (df_ch['Тип записи'] == "0")
             result_list = list(df_ch.loc[df_ch[mask].index]['id'].values)
-
-            if len(result_list) == 0:
-                mask = (df_ch['ИНН'] != "") & (df_ch['ОГРН'] == "") & (df_ch['ИНН'] == row['ИНН']) \
-                       & (df_ch['Наименование(главное рус)'] == row['Наименование(главное рус)']) & (df_ch['Тип записи'] == "0")
-                result_list = list(df_ch.loc[df_ch[mask].index]['id'].values)
 
             if len(result_list) == 0:
                 mask = (df_ch['ФИО'] != "") & (df_ch['Дата рождения'] != "") & (df_ch['Тип записи'] == "1") & (df_ch['Дата рождения'] != row['Дата рождения']) \
@@ -79,19 +71,22 @@ class MyTree(QDialog):
             parent_df = self.load_table_sql("AB")
             ch_1 = self.load_table_sql("X-com")
             ch_2 = self.load_table_sql("User")
+            ch_3 = self.load_table_sql("TR санкции")
 
         elif prior_df == "X-com":
             parent_df = self.load_table_sql("X-com")
             ch_1 = self.load_table_sql("AB")
             ch_2 = self.load_table_sql("User")
+            ch_3 = self.load_table_sql("TR санкции")
         else:
             parent_df = self.load_table_sql("User")
             ch_1 = self.load_table_sql("AB")
             ch_2 = self.load_table_sql("X-com")
+            ch_3 = self.load_table_sql("TR санкции")
 
         d_ch1 = self.create_link(parent_df, ch_1)
         d_ch2 = self.create_link(parent_df, ch_2)
-
+        d_ch3 = self.create_link(parent_df, ch_3)
         for element in remember_con:
             if str(element[0]) in d_ch1.keys():
                 if str(element[1]) not in d_ch1[str(element[0])]:
@@ -103,6 +98,12 @@ class MyTree(QDialog):
                     temp = d_ch2[str(element[0])]
                     temp += [str(element[1])]
                     d_ch2[str(element[0])] = temp
+            elif str(element[0]) in d_ch3.keys():
+                if str(element[1]) not in d_ch3[str(element[0])]:
+                    temp = d_ch3[str(element[0])]
+                    temp += [str(element[1])]
+                    d_ch3[str(element[0])] = temp
+
 
         for element in ignore_con:
             if str(element[0]) in d_ch1.keys():
@@ -115,6 +116,11 @@ class MyTree(QDialog):
                     temp = d_ch2[str(element[0])]
                     temp.remove(str(element[1]))
                     d_ch2[str(element[0])] = temp
+            elif str(element[0]) in d_ch3.keys():
+                if str(element[1]) not in d_ch3[str(element[0])]:
+                    temp = d_ch3[str(element[0])]
+                    temp += [str(element[1])]
+                    d_ch3[str(element[0])] = temp
 
         model = QStandardItemModel(0, len(list(parent_df)), self.treeView)
         for i in range(0, len(list(parent_df))):
@@ -127,9 +133,12 @@ class MyTree(QDialog):
                 for i in d_ch1[row['id']]:
                     p_row[0].appendRow(ch_1[ch_1['id'] == i].apply(lambda x: QtGui.QStandardItem(str(*x.values))).values)
 
-
             if row['id'] in d_ch2.keys():
                 for i in d_ch2[row['id']]:
+                    p_row[0].appendRow(ch_1[ch_1['id'] == i].apply(lambda x: QtGui.QStandardItem(str(*x.values))).values)
+
+            if row['id'] in d_ch3.keys():
+                for i in d_ch3[row['id']]:
                     p_row[0].appendRow(ch_1[ch_1['id'] == i].apply(lambda x: QtGui.QStandardItem(str(*x.values))).values)
             model.appendRow(p_row)
 
@@ -144,11 +153,20 @@ class MyTree(QDialog):
                 if j not in comp_id_list:
                     comp_id_list.append(j)
 
+        for i in list(d_ch3.values()):
+            for j in i:
+                if j not in comp_id_list:
+                    comp_id_list.append(j)
+
         for i, row in ch_1.iterrows():
             if row['id'] not in comp_id_list:
                 model.appendRow(row.apply(lambda x: QtGui.QStandardItem(x)).values)
 
         for i, row in ch_2.iterrows():
+            if row['id'] not in comp_id_list:
+                model.appendRow(row.apply(lambda x: QtGui.QStandardItem(x)).values)
+
+        for i, row in ch_3.iterrows():
             if row['id'] not in comp_id_list:
                 model.appendRow(row.apply(lambda x: QtGui.QStandardItem(x)).values)
 

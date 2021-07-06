@@ -13,8 +13,8 @@ class LinkWindow(object):
         self.spinBox = QtWidgets.QSpinBox(self.centralwidget)
         self.spinBox.setMaximum(99999999)
         self.spinBox.setGeometry(QtCore.QRect(10, 10, 101, 22))
-        self.spinBox_2 = QtWidgets.QSpinBox(self.centralwidget)
-        self.spinBox_2.setMaximum(99999999)
+        self.spinBox_2 = QtWidgets.QTextEdit(self.centralwidget)
+        # self.spinBox_2.setMaximum(99999999)
         self.spinBox_2.setGeometry(QtCore.QRect(10, 40, 101, 22))
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setText("ID Родительская")
@@ -26,7 +26,9 @@ class LinkWindow(object):
         QtCore.QMetaObject.connectSlotsByName(self.centralwidget)
 
     def _send_con_db_1(self, ):
-        self.con.send_con_db(self.spinBox.value(), self.spinBox_2.value(), 1)
+        daughter_list = str(self.spinBox_2.toPlainText()).strip().split(",")
+        for daughter in daughter_list:
+            self.con.send_con_db(self.spinBox.value(), int(daughter.strip()), 1)
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Information)
         msg.setText("Записи были успешно объеденены")
@@ -34,7 +36,9 @@ class LinkWindow(object):
         msg.exec_()
 
     def _send_con_db_2(self):
-        self.con.send_con_db(self.spinBox.value(), self.spinBox_2.value(), 2)
+        daughter_list = str(self.spinBox_2.toPlainText()).strip().split(",")
+        for daughter in daughter_list:
+            self.con.send_con_db(self.spinBox.value(), int(daughter.strip()), 1)
         msg = QtWidgets.QMessageBox()
         msg.setIcon(QtWidgets.QMessageBox.Information)
         msg.setText("Записи были успешно разделены")

@@ -1,20 +1,16 @@
 import pandas as pd
-
-def create_ssw(dataframe,path):
-    cols = [dataframe.headerData(i,1) for i in range(0, dataframe.columnCount())]
-    df = pd.DataFrame([],columns = cols)
-    for row in range(0,dataframe.rowCount()):
-        for col in range(0,dataframe.columnCount()):
-            if dataframe.item(row,col).child() and cols[col] in ["Связь с санкционным элементом (наим)","Связь с санкционным элементом (наим лат)","INN материнской компании","ОГРН материнской компании"]:
-                pass
-        # df.at[row, cols[col]] = dataframe.item(row, col).text()
-
-def create_excel(dataframe,path):
-    cols = [dataframe.headerData(i, 1) for i in range(0, dataframe.columnCount())]
+from delta import aggregation
+def export_excel(model,path):
+    cols = [model.headerData(i, 1) for i in range(0, model.columnCount())]
     df = pd.DataFrame([], columns=cols)
-    cols = [dataframe.headerData(i,1) for i in range(0, dataframe.columnCount())]
-    df = pd.DataFrame([],columns = cols)
-    for row in range(0,dataframe.rowCount()):
-        for col in range(0,dataframe.columnCount()):
-            if dataframe.item(row,col).child() and cols[col] in ["Связь с санкционным элементом (наим)","Связь с санкционным элементом (наим лат)","INN материнской компании","ОГРН материнской компании"]:
+    for column in range(0,model.columnCount()):
+        for row in range(0,  model.rowCount()):
+            df.at[row,cols[column]] = model.item(row,column).text()
 
+    df.to_excel(path+"/Export.xlsx",index=False)
+
+
+def export_excel_tree(model,path):
+    cols = [model.headerData(i, 1) for i in range(0, model.columnCount())]
+    df = aggregation(model)
+    df = pd.DataFrame([], columns=cols)

@@ -24,12 +24,13 @@ agg_list = ['Альтернативные наименования для заг
             'Коды санкционных ограничений', 'Комментарий санкции', 'Страна ограничений', 'Программа ограничений', 'Тип ограничений', 'Статус наименования',
             'Связь с санкционным элементом (наим)', 'Связь с санкционным элементом (наим лат)', 'INN материнской компании', 'ОГРН материнской компании']
 
+
 def check_format(l_check: list) -> bool:
     print("Проверка форматов")
 
     example = examp
 
-    if set(l_check) == set(example):
+    if set([i.lower().strip() for i in l_check]) == set([j.lower().strip() for j in example]):
         return True
     else:
         return False
@@ -37,84 +38,71 @@ def check_format(l_check: list) -> bool:
 
 def deduplicate_list(input):
     print("Начало обработки Excel")
-    empty_df = pd.DataFrame([], columns=list(examp))
     check = check_format(list(input))
     if check == True:
-        input = input[input['Активная запись'] == "Действующий"]
+        # input = input[input['Активная запись'] == "Действующий"]
         input.drop_duplicates(inplace=True, keep='first', subset=check_subset)
-    return input
+        for column in list(input):
+            index = [j.lower().strip() for j in examp].index(column.strip().lower())
+            input.rename({column: [j.lower().strip() for j in examp][index]}, inplace=True)
+
+        return input
+    else:
+        print("Ошибка при загрузке шаблона - поля шаблона не соответствуют требованиям")
+        input()
 
 
 def combine_row(df, idx):
-    try:
-        main_row = df.iloc[idx[0]]
-    except:
-        return None
-    else:
-        for item in idx[1:]:
-            for column in agg_list:
-                if column == 'Коды санкционных ограничений':
-                    curr_val = main_row[column].split(',')
-                    new_val = df.loc[item][column] if main_row[column] != "" else df.loc[item][column]
-                    new_val = new_val.split(',')
-                    for val in new_val:
-                        if str(val).lstrip() not in curr_val:
-                            curr_val += [str(val).lstrip()]
-                    curr_val = ', '.join(set(curr_val))
-                    main_row[column] = curr_val
+    main_row = df.iloc[idx[0]]
+    for item in idx[1:]:
+        for column in agg_list:
+            if column == 'Коды санкционных ограничений':
+                curr_val = main_row[column].split(',')
+                new_val = df.loc[item][column] if main_row[column] != "" else df.loc[item][column]
+                new_val = new_val.split(',')
+                for val in new_val:
+                    if str(val).lstrip() not in curr_val:
+                        curr_val += [str(val).lstrip()]
+                curr_val = ', '.join(set(curr_val))
+                main_row[column] = curr_val
 
-                elif df.loc[item][column] not in main_row[column]:
-                    main_row[column] += " | " + df.loc[item][column] if main_row[column] != "" else df.loc[item][column]
+            elif df.loc[item][column] not in main_row[column]:
+                main_row[column] += " | " + df.loc[item][column] if main_row[column] != "" else df.loc[item][column]
 
-        return main_row
+    return main_row
 
 
 def deduplicate(input):
-    dataframe = deduplicate_list(input)
+    dataframe = deduplicate_list(input.copy())
     dataframe = dataframe.fillna("")
     dataframe = dataframe.applymap(str)
+    dataframe.reset_index(inplace=True,drop=True)
     resulting_df = pd.DataFrame([], columns=list(examp))
     counter = 0
-
+    ignore_ind = []
     for i, row in dataframe.iterrows():
         idx = []
-        if i in dataframe.index:
-            if len(dataframe[(dataframe['ИНН'] == row['ИНН']) & (row['Тип записи'] == 'ЮЛ')& (row['ИНН'] != "")& (row['ОГРН'] != "")
-                             & (dataframe['ОГРН'] == row['ОГРН'])].index) > 1:
-                idx = list(dataframe[(dataframe['ИНН'] == row['ИНН'])
-                                     & (dataframe['ОГРН'] == row['ОГРН'])].index.values)
+        if i not in ignore_ind:
+            if i in dataframe.index:
+                if (row['Тип записи'] == 'ЮЛ') & (len(dataframe[(dataframe['ИНН'] == row['ИНН']) & (row['ИНН'] != "")].index) > 1):
+                    idx = list(dataframe[(dataframe['ИНН'] == row['ИНН'])
+                                         ].index.values)
 
-            elif len(dataframe[(dataframe['ИНН'] == row['ИНН'])
-                               & (row['ИНН'] != "")
-                               & (row['ОГРН'] == "")
-                               & (row['Тип записи'] == 'ЮЛ')
-                               & (dataframe['Наименование(главное рус)'] == row['Наименование(главное рус)'])
-                               & (dataframe['ОГРН'] == row['ОГРН'])].index) > 1:
-                idx = list(dataframe[(dataframe['ИНН'] == row['ИНН'])
-                                     & (dataframe['Наименование(главное рус)'] == row['Наименование(главное рус)'])
-                                     & (row['ОГРН'] == "")].index.values)
+                elif len(dataframe[(row['Тип записи'] == 'ФЛ') & (row['Дата рождения'] != "")
+                                   & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index) > 1:
+                    idx = list(dataframe[(row['Тип записи'] == 'ФЛ')
+                                         & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index.values)
 
-            elif len(dataframe[(row['ИНН'] == "") & (row['ОГРН'] == "") & (row['Тип записи'] == 'ЮЛ')
-                               & (dataframe['Наименование(главное рус)'] == row['Наименование(главное рус)']) ].index) > 1:
-                idx = list(dataframe[(dataframe['ИНН'] == "") & (row['Тип записи'] == 'ЮЛ')
-                                     & (dataframe['Наименование(главное рус)'] == row['Наименование(главное рус)'])
-                                     & (row['ОГРН'] == "")].index.values)
-
-            elif len(dataframe[(row['ИНН'] == "") & (row['Тип записи'] == 'ФЛ')& (row['Дата рождения'] != "")
-                               & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index) > 1:
-                idx = list(dataframe[(dataframe['ИНН'] == "") & (row['Тип записи'] == 'ФЛ')
-                                     & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index.values)
-
-            if idx != []:
-                row_c = combine_row(dataframe, idx)
-                if row_c is not None:
-                    resulting_df.loc[counter] = row_c
+                if idx != []:
+                    row_c = combine_row(dataframe, idx)
+                    if row_c is not None:
+                        resulting_df.loc[counter] = row_c
+                        counter += 1
+                        for ind in idx:
+                            ignore_ind += [ind]
+                else:
+                    resulting_df.loc[counter] = row
                     counter += 1
-                    for ind in idx:
-                        dataframe.drop(ind, inplace=True)
-            else:
-                resulting_df.loc[counter] = row
-                counter += 1
     resulting_df["Коды санкционных ограничений"] = resulting_df["Коды санкционных ограничений"].apply(lambda x: ','.join(set([i.lstrip() for i in x.split(',')])))
 
     return resulting_df

@@ -2,7 +2,8 @@
 from PyQt5 import QtCore, QtWidgets
 from ui_OTBD import UI_OTBD
 from ui_SOZ import MainWindow as UI_SOZ
-import sys
+from Export_module import *
+import sys, os
 
 class Ui_MainWindow(object):
     def __init__(self):
@@ -26,6 +27,7 @@ class Ui_MainWindow(object):
         self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(10, 100, 211, 31))
         self.pushButton_3.setObjectName("pushButton_3")
+        self.pushButton_3.clicked.connect(self.show_export_module)
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(10, 140, 211, 31))
         self.pushButton_4.setObjectName("pushButton_4")
@@ -37,6 +39,8 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
+
+
     def show_ui_SOZ(self):
         self.UI_SOZ = UI_SOZ()
         self.UI_SOZ.show()
@@ -44,6 +48,10 @@ class Ui_MainWindow(object):
     def show_ui_OTBD(self):
         self.ui_OTBD = UI_OTBD()
         self.ui_OTBD.show()
+
+    def show_export_module(self):
+        self.ui_ExportModule = ExportModule()
+        self.ui_ExportModule.show()
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -57,14 +65,16 @@ class Ui_MainWindow(object):
         sys.exit(self.app.exec_())
 
 if __name__ == "__main__":
+    ui = Ui_MainWindow()
     try:
-        ui = Ui_MainWindow()
+
         ui.MainWindow.show()
-        ui.exit()
+
     except Exception:
         print(str(Exception))
         print("В системе возникла ошибка, нажмите Enter для завершения")
-        input()
-
+        file = open(os.path.dirname(os.path.realpath(__file__)) + "\log_file.txt")
+        file.write(str(Exception))
+    ui.exit()
 
 
