@@ -3,6 +3,8 @@ from proxy import *
 from db_connection import *
 from Config_read import confdict
 from SendStatistic import send_statistic
+from Progress import ProgressBar
+
 class ExportModule(QtWidgets.QMainWindow):
     def __init__(self):
         super().__init__()
@@ -161,6 +163,7 @@ class GeneralWidget(QtWidgets.QWidget):
             dataframe["Main"] = "Main"
             # dataframe['id'] += 1
             dataframe = dataframe.fillna('')
+            Progress = ProgressBar(len(dataframe))
             for i, row in dataframe.iterrows():
                 counter += 1
                 if row['Type'] == 'Individual':
@@ -173,9 +176,10 @@ class GeneralWidget(QtWidgets.QWidget):
                     file.write('\n' + line)
                 else:
                     print("Тип лица в строке " + str(i + 1) + " задан некорректно")
+                Progress.SendStep()
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Information)
-            msg.setText('Было выгружено ' + str(counter + 1) + ' строк(и)')
+            msg.setText('Было выгружено ' + str(counter) + ' строк(и)')
             msg.setWindowTitle("Статистика по выгрузке SSW")
             msg.exec_()
             file.close()
@@ -192,6 +196,7 @@ class GeneralWidget(QtWidgets.QWidget):
         col_array.append('Affiliated')
         exampl_df = pd.DataFrame(columns=col_array)
         ssw_df.fillna('',inplace=True)
+        Progress = ProgressBar(len(ssw_df))
         for i, row in ssw_df.iterrows():
             if row['Дата обновления записи']  not in arr_empty:
                 row['Дата обновления записи'] = pd.to_datetime(row['Дата обновления записи'])
@@ -220,6 +225,7 @@ class GeneralWidget(QtWidgets.QWidget):
                 temp_list.extend(name_tran)
                 temp_list.extend(name_vspom)
                 temp_list = list(set(temp_list))
+
                 if row['Наименование(главное лат)'] in temp_list:
                     temp_list.remove(row['Наименование(главное лат)'])
                 if row['Наименование(транслит)'] in temp_list:
@@ -229,8 +235,19 @@ class GeneralWidget(QtWidgets.QWidget):
                         for iterator in range(5, 5 + len(temp_list)):
                             exampl_df.at[i, list(exampl_df)[iterator]] = temp_list[iterator - 5]
 
-                    exampl_df.at[i, 'SDGT'] = 'Sanctions ' + ' (' + self.sanction_text.text() + ')' if self.rewrite_radio.isChecked() \
-                        else  'Sanctions ' + ' (' + self.sanction_text.text() + ')'#+ str(row['Комментарий санкции'])
+                    if self.rewrite_radio.isChecked():
+                        exampl_df.at[i, 'SDGT'] = self.sanction_text.text()
+                    else:
+                        sanctions_str = ''
+                        for item in row['Коды санкционных ограничений'].split(','):
+                            if item.strip() in confdict['MAPPING_SANCTIONS'].keys():
+                                sanctions_str += confdict['MAPPING_SANCTIONS'][item.strip()] + ', '
+
+                        sanctions_str = sanctions_str[:-2] if sanctions_str[-2:] == ', ' else sanctions_str
+                        if sanctions_str != '':
+                            exampl_df.at[i, 'SDGT'] = 'Sanctions ' + ' (' + sanctions_str+')'
+                        else:
+                            exampl_df.at[i, 'SDGT'] = self.sanction_text.text()
 
                     if self.rewrite_radio.isChecked():
                         exampl_df.at[i, 'Affiliated'] = self.affilation_text.text()
@@ -267,7 +284,7 @@ class GeneralWidget(QtWidgets.QWidget):
                                 exampl_df[(exampl_df['INN'] == row['ИНН']) & (exampl_df['Name_lat'] == row['Наименование(главное лат)'])].index.values, 'Affiliated'] = affiliated
                     else:
                         exampl_df[exampl_df[(exampl_df['INN'] == row['ИНН']) & (exampl_df['Name_lat'] == row['Наименование(главное лат)'])].index.values, 'Affiliated'] = self.affilation_text.text()
-
+            Progress.SendStep()
         exampl_df['INN'] = exampl_df['INN'].apply(lambda x: 'INN' + str(x) if not x in arr_empty else x)
         exampl_df = exampl_df.sort_values('id', ascending=True)
         write_txt(exampl_df, dir)

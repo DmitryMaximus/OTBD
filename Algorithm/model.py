@@ -5,6 +5,7 @@ from PyQt5.Qt import *
 from deduplication import deduplicate
 from db_connection import *
 from SendStatistic import send_statistic
+from Progress import ProgressBar
 
 class Delegate(QtWidgets.QStyledItemDelegate):
 
@@ -59,17 +60,18 @@ class MyDelegateInTableView(QtWidgets.QWidget):
 
     def load_table(self, path):
         self.data_model.removeColumns(0, self.data_model.columnCount())
-
+        self.data_model.removeRows(0, self.data_model.rowCount())
         if not path:
             pass
         if ".XML" in path or ".xml" in path:
-            return
+            pass
         if ".xlsx" in path:
             self.df = pd.read_excel(path,dtype=str)
             self.df = self.df.fillna('')
             self.df = self.df.applymap(lambda x: str(x).strip())
             initial_len  = len(self.df)
             new_df = []
+
             for val in set(self.df['Код источника записи'].values.tolist()):
                 if len(new_df)==0:
                     new_df = deduplicate(self.df[self.df['Код источника записи']==val])
@@ -78,6 +80,7 @@ class MyDelegateInTableView(QtWidgets.QWidget):
             self.df=new_df
             result_len = len(self.df)
             if "Объединить" not in list(self.df):
+                QApplication.processEvents()
                 self.df['Объединить'] = "0"
                 self.df = self.df[list(self.df)[-1:] + list(self.df)[:-1]]
 
@@ -129,10 +132,10 @@ class MyDelegateInTableView(QtWidgets.QWidget):
                 source is self.table.viewport()):
             self.menu = QMenu(self)
             pos = event.globalPos()
-            #
-            # addRow = self.menu.addAction('Добавить строку')
-            # addRow.triggered.connect(
-            #     lambda: self.add_row())
+
+            addRow = self.menu.addAction('Добавить строку')
+            addRow.triggered.connect(
+                lambda: self.add_row())
 
             # sort = self.menu.addAction('Отсортировать')
             # sort.triggered.connect(
@@ -201,25 +204,35 @@ class MyDelegateInTableView(QtWidgets.QWidget):
             self.data_model.item(row, 0).setText(str("0"))
 
     def union_rows(self):
-        main_row_ind = None
-        ch_row_ind = []
-        for row in range(0, self.data_model.rowCount()):
-            if self.data_model.item(row, 0).text().lstrip() == "2":
-                main_row_ind = row
-            elif self.data_model.item(row, 0).text().lstrip() == "1":
-                ch_row_ind.append(row)
-        if main_row_ind is not None and ch_row_ind != []:
-            for col in [x for x in range(34, 55) if x not in [46, 47, 48]]:
-                current_val = self.data_model.item(main_row_ind, col).text()
-                for row in ch_row_ind:
-                    print(str(row) + "   " + str(col))
-                    ch_row_val = self.data_model.item(row, col).text() if not self.data_model.item(row, col).text() is None else ""
-                    if ch_row_val != "" and ch_row_val not in current_val:
-                        current_val += " | " + ch_row_val if current_val != "" else ch_row_val
-                self.data_model.item(main_row_ind, col).setText(current_val)
-        self.data_model.item(main_row_ind, 0).setText("0")
-        for row in sorted(set(ch_row_ind), key=int, reverse=True):
-            self.data_model.removeRow(row)
+        p_count = 0
+
+        if self.data_model.rowCount()>0:
+            for row in range(0, self.data_model.rowCount()):
+                if self.data_model.item(row, 0).text().lstrip() == "2":
+                    p_count+=1
+            if p_count == 1:
+                main_row_ind = None
+                ch_row_ind = []
+                for row in range(0, self.data_model.rowCount()):
+                    if self.data_model.item(row, 0).text().lstrip() == "2":
+                        main_row_ind = row
+                    elif self.data_model.item(row, 0).text().lstrip() == "1":
+                        ch_row_ind.append(row)
+                if main_row_ind is not None and ch_row_ind != []:
+                    for col in [x for x in range(34, 55) if x not in [46, 47, 48]]:
+                        current_val = self.data_model.item(main_row_ind, col).text()
+                        for row in ch_row_ind:
+                            print(str(row) + "   " + str(col))
+                            ch_row_val = self.data_model.item(row, col).text() if not self.data_model.item(row, col).text() is None else ""
+                            if ch_row_val != "" and ch_row_val not in current_val:
+                                current_val += " | " + ch_row_val if current_val != "" else ch_row_val
+                        self.data_model.item(main_row_ind, col).setText(current_val)
+                self.data_model.item(main_row_ind, 0).setText("0")
+                for row in sorted(set(ch_row_ind), key=int, reverse=True):
+                    self.data_model.removeRow(row)
+                return 1
+            else:
+                return 0
 
     def _change_row(self):
         connect=SqlModule()

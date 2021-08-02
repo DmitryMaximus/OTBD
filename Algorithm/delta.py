@@ -4,7 +4,7 @@ import pandas as pd
 import  os
 from PyQt5.Qt import QMessageBox
 from PyQt5 import QtWidgets
-
+from Progress import ProgressBar
 def aggregation(data):
     """
     Логика агрегации родительских и дочерних строк модели tree_model
@@ -67,6 +67,7 @@ def create_delta(data,path_to_save):
     df_delta = pd.read_excel(os.path.dirname(os.path.abspath(__file__))+ "\exmp.xlsx",dtype=str).fillna("")
     df_delta['Комментарий_дельта'] = ""
     df_delta['col_num'] = ""
+    Progress = ProgressBar(len(df_delta))
     for i, row in df_delta.iterrows():
         if row['Тип записи'] in ['ЮЛ','0',0]:
             checker = df_main['ИНН']==row['ИНН']
@@ -83,7 +84,7 @@ def create_delta(data,path_to_save):
                         df_delta.at[i, 'col_num'] += "|"+str(list(df_delta).index(col))
                         df_delta.at[i, col] = new_row[col]
                 df_delta.at[i, 'Комментарий_дельта'] += "В записи присутствуют изменения"
-
+            Progress.SendStep()
         elif row['Тип записи'] in ['ФЛ',1,'1']:
             checker = (df_main['ФИО']==row['ФИО'])&(df_main['Дата рождения']==row['Дата рождения'])
             if len(df_delta[df_delta['ИНН'] == row['ИНН']]) > 1:
@@ -99,7 +100,7 @@ def create_delta(data,path_to_save):
                         df_delta.at[i, 'col_num'] += "|" + str(list(df_delta).index(col))
                         df_delta.at[i, col] = new_row[col]
                 df_delta.at[i, 'Комментарий_дельта'] += "В записи присутствуют изменения"
-
+            Progress.SendStep()
 
     for i, row in df_main.iterrows():
         if len(df_delta[df_delta['ИНН']==row['ИНН']]) == 0 or len(df_delta[(df_delta['ФИО']==row['ФИО'])&(df_delta['Дата рождения']==row['Дата рождения'])]) == 0:
@@ -118,7 +119,7 @@ def create_delta(data,path_to_save):
     sheet = workbook['Sheet1']
     idx=1
     for items in cols_change:
-        if items != "":
+        if items != "" and not pd.isna(items):
             items = items[1:].split("|")
             for col in list(map(int,items)):
                 cell_path = sheet.cell(idx+1, col+1)

@@ -3,7 +3,8 @@ from requests.auth import HTTPBasicAuth
 from db_connection import *
 import pandas as  pd
 from deduplication import examp
-
+from Progress import ProgressBar
+from PyQt5.QtWidgets import  QApplication
 
 class ParseRef(object):
     def __init__(self,path=None):
@@ -61,6 +62,7 @@ class ParseRef(object):
                 df = df[df['Тип записи']!='']
                 if len(df)>0:
                     for i, row in df.iterrows():
+                        QApplication.processEvents()
                         SqlModule.add_record(SqlModule(), row.to_list())
                         iter+=1
                         if iter == 1000:
@@ -75,6 +77,7 @@ class ParseRef(object):
             comp_type = {'F': 'ФЛ', 'M': 'ФЛ', 'U': 'ФЛ', 'E': 'ЮЛ'}
             iter = 0
             for i, row in df.iterrows():
+                QApplication.processEvents()
                 if any([i in self.key_list['abbr'] for i in row['KEYWORDS'].split('~')]) and not pd.isna(row['KEYWORDS']):
                     df_rf.at[iter, 'Коды санкционных ограничений'] = self.add_code(row, self.key_list)
                     print(self.add_code(row, self.key_list))

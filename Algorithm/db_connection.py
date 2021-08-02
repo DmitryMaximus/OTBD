@@ -3,7 +3,7 @@ import os
 import datetime
 import pandas as pd
 from Config_read import confdict
-
+import pandas.io.sql as psql
 
 class SqlModule(object):
     def __init__(self, parent=None):
@@ -16,7 +16,7 @@ class SqlModule(object):
                                            [self.user, self.password], confdict['SERVER_DATA']['path_to_manager'])
         self.curs = self.sql_conn.cursor()
         self.sources = {"X-com": "1", 'AB': "2", "User": "3", "TR общий": "4", "TR санкции": "5"}
-        self.company_types = {"ЮЛ": 0, "ФЛ": 1,"Иное":2}
+        self.company_types = {"ЮЛ": 0, "ФЛ": 1, "Иное": 2}
 
     def get_source(self, mode=1):
         if not isinstance(mode, int):
@@ -45,12 +45,12 @@ class SqlModule(object):
     def convert_date(self, date):
         try:
             if date != '' and date != None:
-                date = "'" + datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S').strftime('%Y-%d-%m %H:%M:%S') + "'"
+                date = "'" + datetime.datetime.strptime(date, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d %H:%M:%S') + "'"
             else:
                 date = 'NULL'
         except:
             if date != '' and date != None:
-                date = "'" + datetime.datetime.strptime(date, '%Y/%m/%d').strftime('%Y-%d-%m %H:%M:%S') + "'"
+                date = "'" + datetime.datetime.strptime(date, '%Y/%m/%d').strftime('%Y-%m-%d %H:%M:%S') + "'"
             else:
                 date = 'NULL'
         return date
@@ -110,7 +110,6 @@ class SqlModule(object):
                                            f"""jdbc:sqlserver://{self.server}; databaseName={self.database}""",
                                            [self.user, self.password], confdict['SERVER_DATA']['path_to_manager'])
         self.curs = self.sql_conn.cursor()
-
         sql = "SELECT DISTINCT * FROM " \
               "Records " \
               "INNER JOIN Companies " \
@@ -136,9 +135,10 @@ class SqlModule(object):
               "ON alternative_names.company = tab_5.company and tab_5.g_index=5) alt_names " \
               "ON alt_names.company = Companies.id " \
               "WHERE Records.source = " + self.sources[source] + ";"
+
         return pd.read_sql(sql, self.sql_conn)
 
-    def update_dedup(self,values,company_id,key,mode=1):
+    def update_dedup(self, values, company_id, key, mode=1):
         def get_current_value(key, company_id):
             table_name = confdict['COLS_TO_TABLE'][str(key)]
             col_name = confdict['COLS_TO_NAMES'][str(key)]
@@ -167,7 +167,7 @@ class SqlModule(object):
                 sql = "UPDATE %s SET %s = %s WHERE id = %s" % (table_name, col_name, value, row_id)
 
             elif int(key) in [i for i in range(26, 35)]:  # Обновление таблицы Sanctions
-                sql = "UPDATE %s SET %s = %s FROM %s INNER JOIN Companies ON  companies.id = Sanctions.company_id WHERE companies.record = %s" % (
+                sql = "UPDATE %s SET %s = '%s' FROM %s INNER JOIN Companies ON  companies.id = Sanctions.company_id WHERE companies.record = %s" % (
                     table_name, col_name, value, table_name, row_id)
             else:
                 sql = ''
@@ -175,26 +175,24 @@ class SqlModule(object):
                 self.curs.execute(sql)
                 self.sql_conn.commit()
 
-
-        if int(key) == 17 and values not in get_current_value(8,company_id): #доп проверка текущие главное наименование != добавляемому альтернативному
+        if int(key) == 17 and values not in get_current_value(8, company_id):  # доп проверка текущие главное наименование != добавляемому альтернативному
             data = (values, company_id)
             sql = "INSERT INTO [Sanctions].[dbo].[alternative_names] VALUES ('%s',%s,1);" % data
             self.curs.execute(sql)
             self.sql_conn.commit()
-        elif int(key) == 16 and values not in get_current_value(16,company_id):
+        elif int(key) == 16 and values not in get_current_value(16, company_id):
             data = (values, company_id)
             sql = "INSERT INTO [Sanctions].[dbo].[alternative_names] VALUES ('%s',%s,1);" % data
             self.curs.execute(sql)
             self.sql_conn.commit()
         elif int(key) != 17 and int(key) != 16:
-            cur_value  = get_current_value(key,company_id)
+            cur_value = get_current_value(key, company_id)
             if cur_value != 'no_value' and values not in cur_value:
                 values = cur_value + " | " + values
-                dedup_update_row(key,values,company_id)
+                dedup_update_row(key, values, company_id)
 
     def change_row(self, coord: list):
         """
-
         :param coord: [id_компании, Номер колонки с изменениями,value]
         :return:
         """
@@ -225,7 +223,7 @@ class SqlModule(object):
         elif int(coord[1]) in [i for i in range(20, 25)]:
             sql = "SELECT distinct  id from Companies where record =  %s" % row_id
             self.curs.execute(sql)
-            company_id  = self.curs.fetchone()[0]
+            company_id = self.curs.fetchone()[0]
             data = (data, company_id, '1')
             sql = "INSERT INTO alternative_names VALUES ('%s',%s,%s);" % data
             self.curs.execute(sql)
@@ -272,20 +270,20 @@ class SqlModule(object):
 
     def complex_row_remove(self, vals):
         source = self.sources[vals[7]]
-        if vals[3] != '':
-            data = (vals[3],source)
-            sql = "DELETE Records FROM Records LEFT JOIN Companies ON Records.id = Companies.record WHERE Companies.id = %s and Records.source = %s" % data
-        elif vals[31] != '':
-            data = (vals[31],source)
+        # if vals[3] != '':
+        #     data = (vals[3], source)
+        #     sql = "DELETE Records FROM Records LEFT JOIN Companies ON Records.id = Companies.record WHERE Companies.id = %s and Records.source = %s" % data
+        if vals[31] != '':
+            data = (vals[31], source)
             sql = "DELETE Records FROM Records LEFT JOIN Companies ON Records.id = Companies.record WHERE Companies.inn = '%s' and Records.source = %s" % data
         elif vals[16] != '':
-            data = (vals[16],source)
+            data = (vals[16], source)
             sql = "DELETE Records FROM Records LEFT JOIN Companies ON Records.id = Companies.record WHERE Companies.FIO = '%s' and Records.source = %s" % data
         elif vals[16] != '':
-            data = (vals[16],source)
+            data = (vals[16], source)
             sql = "DELETE Records FROM Records LEFT JOIN Companies ON Records.id = Companies.record WHERE Companies.FIO = '%s' and Records.source = %s" % data
         elif vals[17] != '':
-            data = (vals[17],source)
+            data = (vals[17], source)
             sql = "DELETE Records FROM Records LEFT JOIN Companies ON Records.id = Companies.record WHERE Companies.name_main_rus = '%s' and Records.source = %s" % data
         self.curs.execute(sql)
         self.sql_conn.commit()
@@ -297,7 +295,7 @@ class SqlModule(object):
         result = self.curs
         return result
 
-    def update_keys(self,data):
+    def update_keys(self, data):
         id_list = [i[0] for i in data]
         for id in id_list:
             sql = "DELETE key_ref FROM key_ref  WHERE key_ref.id = %s" % id
@@ -305,7 +303,7 @@ class SqlModule(object):
             self.sql_conn.commit()
 
         for item in data:
-            if len(item)>1:
-                sql ="INSERT INTO key_ref VALUES ({},'{}','{}','{}','{}','{}');".format(*item)
+            if len(item) > 1:
+                sql = "INSERT INTO key_ref VALUES ({},'{}','{}','{}','{}','{}');".format(*item)
                 self.curs.execute(sql)
                 self.sql_conn.commit()

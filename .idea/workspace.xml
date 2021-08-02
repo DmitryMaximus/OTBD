@@ -2,37 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="26ad4ba3-49f3-434a-8feb-414a36fb5055" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Algorithm/Export_module.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithm/Refenitiv.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithm/delta.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithm/import_ref.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Algorithm/proxy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fns.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Algorithm/Progress.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/Config_read.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/Config_read.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/Export.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/Export.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/Export_module.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/Export_module.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/Refenitiv.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/Refenitiv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/SanctionsDDL.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/SanctionsDDL.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/SendStatistic.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/SendStatistic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/data_temp.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/data_temp.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/db_connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/db_connection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/deduplication.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/deduplication.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/delta.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/delta.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/exmp.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/exmp.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/import_ref.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/import_ref.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/link_window.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/link_window.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.001" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.001" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.002" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.002" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.003" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.003" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.004" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.004" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.005" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.005" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.006" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.006" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.007" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/output/ui_mainwindow.7z.007" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Algorithm/output/Руководство пользователя по инструменту ведения санкционных списков.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/premium.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/premium.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/proxy.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/proxy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/temp.xls" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/temp.xls" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Algorithm/test.spec" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/test.spec" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/tree_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/tree_model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/ui_OTBD.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/ui_OTBD.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/ui_SOZ.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/ui_SOZ.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Algorithm/ui_mainwindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/Algorithm/ui_mainwindow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sqljdbc42.jar" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,8 +58,8 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Algorithm" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RunManager" selected="Python.ui_mainwindow">
     <configuration name="Refenitiv" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
@@ -201,99 +195,94 @@
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2299" y="330" key="#ui_mainwindow/0.0.3440.1400@0.0.3440.1400" timestamp="1623714341115" />
-    <state x="797" y="556" width="752" height="599" key="#xdebugger.evaluate" timestamp="1625479518474">
+    <state x="1428" y="502" width="752" height="599" key="#xdebugger.evaluate" timestamp="1627565358231">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="797" y="556" width="752" height="599" key="#xdebugger.evaluate/0.0.3440.1400@0.0.3440.1400" timestamp="1625479518474" />
-    <state width="1992" height="466" key="DebuggerActiveHint" timestamp="1620104366676">
+    <state x="1428" y="502" width="752" height="599" key="#xdebugger.evaluate/0.0.3440.1400@0.0.3440.1400" timestamp="1627565358231" />
+    <state width="1992" height="466" key="DebuggerActiveHint" timestamp="1626214596855">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1992" height="466" key="DebuggerActiveHint/0.0.3440.1400@0.0.3440.1400" timestamp="1620104366676" />
-    <state x="1500" y="455" key="FileChooserDialogImpl" timestamp="1623746749354">
+    <state width="1992" height="466" key="DebuggerActiveHint/0.0.3440.1400@0.0.3440.1400" timestamp="1626214596855" />
+    <state x="1500" y="455" key="FileChooserDialogImpl" timestamp="1626704864125">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1500" y="455" key="FileChooserDialogImpl/0.0.3440.1400@0.0.3440.1400" timestamp="1623746749354" />
-    <state width="1696" height="238" key="GridCell.Tab.0.bottom" timestamp="1625602983940">
+    <state x="1500" y="455" key="FileChooserDialogImpl/0.0.3440.1400@0.0.3440.1400" timestamp="1626704864125" />
+    <state width="3419" height="237" key="GridCell.Tab.0.bottom" timestamp="1627590599554">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="238" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1625602983940" />
-    <state width="1696" height="238" key="GridCell.Tab.0.center" timestamp="1625602983940">
+    <state width="3419" height="237" key="GridCell.Tab.0.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1627590599554" />
+    <state width="3419" height="237" key="GridCell.Tab.0.center" timestamp="1627590599554">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="238" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1625602983940" />
-    <state width="1696" height="238" key="GridCell.Tab.0.left" timestamp="1625602983940">
+    <state width="3419" height="237" key="GridCell.Tab.0.center/0.0.3440.1400@0.0.3440.1400" timestamp="1627590599554" />
+    <state width="3419" height="237" key="GridCell.Tab.0.left" timestamp="1627590599554">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="238" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1625602983940" />
-    <state width="1696" height="238" key="GridCell.Tab.0.right" timestamp="1625602983940">
+    <state width="3419" height="237" key="GridCell.Tab.0.left/0.0.3440.1400@0.0.3440.1400" timestamp="1627590599554" />
+    <state width="3419" height="237" key="GridCell.Tab.0.right" timestamp="1627590599554">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="238" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1625602983940" />
-    <state width="1696" height="238" key="GridCell.Tab.1.bottom" timestamp="1625602994779">
+    <state width="3419" height="237" key="GridCell.Tab.0.right/0.0.3440.1400@0.0.3440.1400" timestamp="1627590599554" />
+    <state width="3419" height="237" key="GridCell.Tab.1.bottom" timestamp="1627590599554">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="238" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1625602994779" />
-    <state width="1696" height="238" key="GridCell.Tab.1.center" timestamp="1625602994779">
+    <state width="3419" height="237" key="GridCell.Tab.1.bottom/0.0.3440.1400@0.0.3440.1400" timestamp="1627590599554" />
+    <state width="3419" height="237" key="GridCell.Tab.1.center" timestamp="1627590599554">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="238" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1625602994779" />
-    <state width="1696" height="238" key="GridCell.Tab.1.left" timestamp="1625602994779">
+    <state width="3419" height="237" key="GridCell.Tab.1.center/0.0.3440.1400@0.0.3440.1400" timestamp="1627590599554" />
+    <state width="3419" height="237" key="GridCell.Tab.1.left" timestamp="1627590599554">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="238" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1625602994779" />
-    <state width="1696" height="238" key="GridCell.Tab.1.right" timestamp="1625602994779">
+    <state width="3419" height="237" key="GridCell.Tab.1.left/0.0.3440.1400@0.0.3440.1400" timestamp="1627590599554" />
+    <state width="3419" height="237" key="GridCell.Tab.1.right" timestamp="1627590599554">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state width="1696" height="238" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1625602994779" />
-    <state x="1221" y="342" key="SettingsEditor" timestamp="1623276582641">
+    <state width="3419" height="237" key="GridCell.Tab.1.right/0.0.3440.1400@0.0.3440.1400" timestamp="1627590599554" />
+    <state x="1221" y="342" key="SettingsEditor" timestamp="1627636260062">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1221" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1623276582641" />
+    <state x="1221" y="342" key="SettingsEditor/0.0.3440.1400@0.0.3440.1400" timestamp="1627636260062" />
     <state width="867" height="703" key="XDebugger.FullValuePopup" timestamp="1625195272927">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state width="867" height="703" key="XDebugger.FullValuePopup/0.0.3440.1400@0.0.3440.1400" timestamp="1625195272927" />
-    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1625600839992">
+    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog" timestamp="1627636208069">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1625600839992" />
+    <state x="1416" y="524" key="com.intellij.ide.util.TipDialog/0.0.3440.1400@0.0.3440.1400" timestamp="1627636208069" />
     <state x="2389" y="622" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1624828125197">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
     <state x="2389" y="622" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.3440.1400@0.0.3440.1400" timestamp="1624828125197" />
-    <state x="2151" y="439" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1625478042579">
+    <state x="2151" y="439" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1626225052276">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2151" y="439" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.3440.1400@0.0.3440.1400" timestamp="1625478042579" />
-    <state x="-7" y="0" width="1734" height="1407" key="dock-window-1" timestamp="1624951686666">
+    <state x="2151" y="439" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.3440.1400@0.0.3440.1400" timestamp="1626225052276" />
+    <state x="154" y="25" width="1536" height="1119" key="dock-window-1" timestamp="1626213043718">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="-7" y="0" width="1734" height="1407" key="dock-window-1/0.0.3440.1400@0.0.3440.1400" timestamp="1624951686666" />
+    <state x="154" y="25" width="1536" height="1119" key="dock-window-1/0.0.3440.1400@0.0.3440.1400" timestamp="1626213043718" />
     <state x="57" y="0" width="1702" height="1447" key="dock-window-1/64.0.3376.1440@64.0.3376.1440" timestamp="1623746781897" />
-    <state x="988" y="103" width="1471" height="1349" key="dock-window-2" timestamp="1624617143115">
+    <state x="-7" y="0" width="1734" height="1407" key="dock-window-2" timestamp="1626248680962">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="988" y="103" width="1471" height="1349" key="dock-window-2/0.0.3440.1400@0.0.3440.1400" timestamp="1624617143115" />
-    <state x="2211" y="400" width="737" height="606" key="find.popup" timestamp="1625479541619">
+    <state x="-7" y="0" width="1734" height="1407" key="dock-window-2/0.0.3440.1400@0.0.3440.1400" timestamp="1626248680962" />
+    <state x="2211" y="400" width="737" height="606" key="find.popup" timestamp="1627462020614">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="2211" y="400" width="737" height="606" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1625479541619" />
-    <state x="1383" y="315" key="search.everywhere.popup" timestamp="1624997833783">
+    <state x="2211" y="400" width="737" height="606" key="find.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1627462020614" />
+    <state x="1383" y="315" width="672" height="678" key="search.everywhere.popup" timestamp="1626222880496">
       <screen x="0" y="0" width="3440" height="1400" />
     </state>
-    <state x="1383" y="315" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1624997833783" />
+    <state x="1383" y="315" width="672" height="678" key="search.everywhere.popup/0.0.3440.1400@0.0.3440.1400" timestamp="1626222880496" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Algorithm/delta.py</url>
-          <line>121</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Algorithm/ui_SOZ.py</url>
-          <line>120</line>
+          <line>131</line>
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
@@ -308,38 +297,53 @@
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Algorithm/model.py</url>
-          <line>205</line>
+          <line>215</line>
           <option name="timeStamp" value="249" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Algorithm/deduplication.py</url>
-          <line>107</line>
+          <line>109</line>
           <option name="timeStamp" value="279" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Algorithm/deduplication.py</url>
-          <line>97</line>
+          <line>98</line>
           <option name="timeStamp" value="280" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Algorithm/deduplication.py</url>
-          <line>98</line>
+          <line>99</line>
           <option name="timeStamp" value="281" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Algorithm/deduplication.py</url>
-          <line>99</line>
+          <line>100</line>
           <option name="timeStamp" value="282" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Algorithm/deduplication.py</url>
-          <line>96</line>
+          <line>97</line>
           <option name="timeStamp" value="283" />
         </line-breakpoint>
         <line-breakpoint suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Algorithm/deduplication.py</url>
-          <line>103</line>
+          <line>104</line>
           <option name="timeStamp" value="286" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Algorithm/db_connection.py</url>
+          <line>248</line>
+          <option name="timeStamp" value="288" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Algorithm/db_connection.py</url>
+          <line>249</line>
+          <option name="timeStamp" value="289" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Algorithm/delta.py</url>
+          <line>122</line>
+          <option name="timeStamp" value="297" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

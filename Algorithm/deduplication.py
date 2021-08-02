@@ -1,5 +1,5 @@
 import pandas as pd
-
+from Progress import ProgressBar
 dlm = ' | '
 func = lambda x: [dlm + str(i) + dlm for i in x.values]
 examp = ['Комментарии пользователя', 'Активная запись', 'Идентификатор Записи', 'Дата генерации записи', 'Дата обновления записи', 'Вид изменения записи',
@@ -26,8 +26,6 @@ agg_list = ['Альтернативные наименования для заг
 
 
 def check_format(l_check: list) -> bool:
-    print("Проверка форматов")
-
     example = examp
 
     if set([i.lower().strip() for i in l_check]) == set([j.lower().strip() for j in example]):
@@ -37,7 +35,6 @@ def check_format(l_check: list) -> bool:
 
 
 def deduplicate_list(input):
-    print("Начало обработки Excel")
     check = check_format(list(input))
     if check == True:
         # input = input[input['Активная запись'] == "Действующий"]
@@ -80,29 +77,35 @@ def deduplicate(input):
     resulting_df = pd.DataFrame([], columns=list(examp))
     counter = 0
     ignore_ind = []
+    Progress = ProgressBar(len(dataframe))
     for i, row in dataframe.iterrows():
-        idx = []
-        if i not in ignore_ind:
-            if i in dataframe.index:
-                if (row['Тип записи'] == 'ЮЛ') & (len(dataframe[(dataframe['ИНН'] == row['ИНН']) & (row['ИНН'] != "")].index) > 1):
-                    idx = list(dataframe[(dataframe['ИНН'] == row['ИНН'])
-                                         ].index.values)
+        if row['Активная запись'].lower() != 'удаление':
+            idx = []
+            if i not in ignore_ind:
+                if i in dataframe.index:
+                    if (row['Тип записи'] == 'ЮЛ') & (len(dataframe[(dataframe['ИНН'] == row['ИНН']) & (row['ИНН'] != "")].index) > 1):
+                        idx = list(dataframe[(dataframe['ИНН'] == row['ИНН'])
+                                             ].index.values)
 
-                elif len(dataframe[(row['Тип записи'] == 'ФЛ') & (row['Дата рождения'] != "")
-                                   & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index) > 1:
-                    idx = list(dataframe[(row['Тип записи'] == 'ФЛ')
-                                         & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index.values)
+                    elif len(dataframe[(row['Тип записи'] == 'ФЛ') & (row['Дата рождения'] != "")
+                                       & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index) > 1:
+                        idx = list(dataframe[(row['Тип записи'] == 'ФЛ')
+                                             & (dataframe['Дата рождения'] == row['Дата рождения']) & (dataframe['ФИО'] == row['ФИО'])].index.values)
 
-                if idx != []:
-                    row_c = combine_row(dataframe, idx)
-                    if row_c is not None:
-                        resulting_df.loc[counter] = row_c
+                    if idx != []:
+                        row_c = combine_row(dataframe, idx)
+                        if row_c is not None:
+                            resulting_df.loc[counter] = row_c
+                            counter += 1
+                            for ind in idx:
+                                ignore_ind += [ind]
+                    else:
+                        resulting_df.loc[counter] = row
                         counter += 1
-                        for ind in idx:
-                            ignore_ind += [ind]
-                else:
-                    resulting_df.loc[counter] = row
-                    counter += 1
+        else:
+            resulting_df.loc[counter] = row
+            counter += 1
+        Progress.SendStep()
     resulting_df["Коды санкционных ограничений"] = resulting_df["Коды санкционных ограничений"].apply(lambda x: ','.join(set([i.lstrip() for i in x.split(',')])))
 
     return resulting_df

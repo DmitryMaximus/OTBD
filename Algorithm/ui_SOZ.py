@@ -3,7 +3,7 @@
 
 from model import *
 from db_connection import *
-
+from Progress import ProgressBar
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, parent=None):
@@ -64,7 +64,13 @@ class MainWindow(QtWidgets.QMainWindow):
 
     @QtCore.pyqtSlot()
     def __union_rows(self):
-        self.view.union_rows()
+        return_code = self.view.union_rows()
+        if return_code == 0:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Information)
+            msg.setText("Выбрано несколько родительских строк, скоректируйте ошибку, только одна строка должна быть отмечена флагом '2'")
+            msg.setWindowTitle("Объединение")
+            msg.exec_()
 
     @QtCore.pyqtSlot()
     def get_file_path_click(self):
@@ -85,28 +91,33 @@ class MainWindow(QtWidgets.QMainWindow):
 
         return data
 
-    def show_info(self, rows_insert: int, rows_dedup):
+    def show_info(self, rows_insert: int, rows_dedup, rows_deleted):
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
-        msg.setText("Добавлено/удалено  строк: " + str(rows_insert) + "\nДедублицировано строк: "
-                    + str(rows_dedup))
+        msg.setText("Добавлено строк: " + str(rows_insert) + "\nДедублицировано строк: "
+                    + str(rows_dedup) +  "\n Удалено строк: "+str(rows_deleted))
         msg.setWindowTitle("Статистика по загрузке")
         msg.exec_()
 
     def insert_db_dedup(self, data):
         rows_insert = 0
         rows_dedup = 0
-
+        rows_deleted = 0
         data_db = self.connect_sql.create_df(data[0][7])
+        data_db = data_db.fillna('')
+
+        self.Progress = ProgressBar(len(data))
         for row in data:
+            self.Progress.SendStep()
             if str(row[2]).strip().lower() == "удаление":
                 self.connect_sql.complex_row_remove(row)
+                rows_deleted+=1
             else:
                 if row[11] == 'ЮЛ':
                     values_d = {}
                     if len(data_db[data_db['inn'] == row[31]]) > 0:
                         company_id = data_db[data_db['inn'] == row[31]]['id'].values[0][1]
-                        convert_d = {40:36,41:27,43:28,44:29,45:30,49:31,50:32,51:33,52:34,53:35,17:17}
+                        convert_d = {40: 36, 41: 27, 43: 28, 44: 29, 45: 30, 49: 31, 50: 32, 51: 33, 52: 34, 53: 35, 17: 17}
                         for i in [41, 43, 44, 45, 49, 50, 51, 52, 53, 40]:
                             if not pd.isna(row[i]) or row[i] != '':
                                 values_d[i] = row[i]
@@ -115,17 +126,17 @@ class MainWindow(QtWidgets.QMainWindow):
                                 values_d[17] = row[17]  # Делаем из Наименование(главное рус) альтернативное наименование
 
                         for key in values_d.keys():
-                            self.connect_sql.update_dedup(values_d[key],company_id,convert_d[key],mode=1)
-                            rows_dedup +=1
+                            self.connect_sql.update_dedup(values_d[key], company_id, convert_d[key], mode=1)
+                        rows_dedup += 1
                     else:
                         self.connect_sql.add_record(row)
-                        rows_insert+=1
+                        rows_insert += 1
 
                 elif row[11] == 'ФЛ':
                     values_d = {}
-                    if len(data_db[(data_db['name_main_rus'] == row[31]) & (data_db['birth_date'] == row[21])]) > 0:
-                        company_id = data_db[data_db['inn'] == row[31]]['id'].values[0][1]
-                        convert_d = {40: 36, 41: 27, 43: 28, 44: 29, 45: 30, 49: 31, 50: 32, 51: 33, 52: 34, 53: 35, 17: 17, 16:16}
+                    if len(data_db[(data_db['name_main_rus'] == row[16]) & (data_db['birth_date'] == row[21])]) > 0:
+                        company_id = data_db[(data_db['name_main_rus'] == row[16]) & (data_db['birth_date'] == row[21])]['id'].values[0][1]
+                        convert_d = {40: 36, 41: 27, 43: 28, 44: 29, 45: 30, 49: 31, 50: 32, 51: 33, 52: 34, 53: 35, 17: 17, 16: 16}
                         for i in [41, 43, 44, 45, 49, 50, 51, 52, 53, 40]:
                             if not pd.isna(row[i]) or row[i] != '':
                                 values_d[i] = row[i]
@@ -135,49 +146,66 @@ class MainWindow(QtWidgets.QMainWindow):
 
                         for key in values_d.keys():
                             self.connect_sql.update_dedup(values_d[key], company_id, convert_d[key], mode=1)
-                            rows_dedup += 1
+                        rows_dedup += 1
                     else:
                         self.connect_sql.add_record(row)
                         rows_insert += 1
-        self.show_info(rows_insert,rows_dedup)
+        return rows_insert,rows_deleted
 
     def insert_db_rewrite(self, data):
         self.connect_sql.clear_list(data[0][7])
-
+        self.Progress = ProgressBar(len(data))
+        r_ins = 0
+        r_del = 0
         for row in data:
+            self.Progress.SendStep()
             if str(row[2]).strip().lower() != "удаление":
                 self.connect_sql.add_record(row)
+                r_ins +=1
             else:
                 self.connect_sql.complex_row_remove(row)
+                r_del +=1
+
+        return r_ins, r_del
 
     @QtCore.pyqtSlot()
     def insert_data(self):
-        try:
-            data_dict = self.parse_data()
-            if self.radioButton.isChecked():
-                ret = QMessageBox().question(self, '', "Вы действительно хотите перезаписать список?", QMessageBox().Yes | QMessageBox().No)
-                if ret == QMessageBox().Yes:
-                    counter = 0
-                    for i in data_dict.keys():  # проверка что спискb не пустые, чтобы очистить список в базе
-                        if len(data_dict[i]) > 0:
-                            self.insert_db_rewrite(data_dict[i])
-                            counter += len(data_dict[i])
-                    QMessageBox(QMessageBox.Information, "Импорт данных в БД", "В базу данных было успешно импортировано " + str(counter) + " строк").exec_()
-            else:
-                ret = QMessageBox().question(self, '', "Вы действительно хотите добавить/удалить записи?", QMessageBox().Yes | QMessageBox().No)
-                if ret == QMessageBox().Yes:
-                    for i in data_dict.keys():  # проверка что спискb не пустые, чтобы очистить список в базе
-                        if len(data_dict[i]) > 1:
-                            self.insert_db_dedup(data_dict[i])
 
-        except:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Information)
-            msg.setText("Проверьте корректность вводимых данных в поле 'Код источника записи'")
-            msg.setWindowTitle("Ошибка при загрузке данных")
-            msg.exec_()
-
-
+        rows_inserted = 0
+        rows_deleted = 0
+        # try:
+        len_total = 0
+        data_dict = self.parse_data()
+        for i in data_dict.keys():
+            len_total+=len(data_dict[i])
+        if self.radioButton.isChecked():
+            ret = QMessageBox().question(self, '', "Вы действительно хотите перезаписать список?", QMessageBox().Yes | QMessageBox().No)
+            if ret == QMessageBox().Yes:
+                counter = 0
+                for i in data_dict.keys():  # проверка что спискb не пустые, чтобы очистить список в базе
+                    if len(data_dict[i]) > 0:
+                        r_ins, r_deleted = self.insert_db_rewrite(data_dict[i])
+                        rows_inserted += r_ins
+                        rows_deleted +=r_deleted
+                        counter += len(data_dict[i])
+                # QMessageBox(QMessageBox.Information, "Импорт данных в БД", "В базу данных было успешно импортировано " + str(counter) + " строк").exec_()
+        else:
+            ret = QMessageBox().question(self, '', "Вы действительно хотите добавить/удалить записи?", QMessageBox().Yes | QMessageBox().No)
+            if ret == QMessageBox().Yes:
+                for i in data_dict.keys():  # проверка что спискb не пустые, чтобы очистить список в базе
+                    if len(data_dict[i]) != 0:
+                        r_ins, r_deleted  = self.insert_db_dedup(data_dict[i])
+                        rows_inserted += r_ins
+                        rows_deleted += r_deleted
+        rows_dedup = len_total - rows_inserted - rows_deleted
+        if ret == QMessageBox().Yes:
+            self.show_info(rows_inserted, rows_dedup,rows_deleted)
+        # except:
+        #     msg = QMessageBox()
+        #     msg.setIcon(QMessageBox.Information)
+        #     msg.setText("Проверьте корректность вводимых данных в поле 'Код источника записи'")
+        #     msg.setWindowTitle("Ошибка при загрузке данных")
+        #     msg.exec_()
 
 
 if __name__ == "__main__":

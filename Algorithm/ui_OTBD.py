@@ -69,7 +69,12 @@ class OptionsWidget(QtWidgets.QWidget):
         lay = QtWidgets.QVBoxLayout(self)
         hlay = QtWidgets.QHBoxLayout()
         lay.addLayout(hlay)
+        self.lay_h = QtWidgets.QHBoxLayout(self)
+        self.lay_h.setAlignment(Qt.AlignRight)
+
         self.treeView = MyTree()
+        self.rewrite_radio = QtWidgets.QRadioButton()
+        self.radio_label = QtWidgets.QLabel("Использовать рефенитив для формирования представления?")
 
         self.pushButton_2 = QtWidgets.QPushButton("Отобразить дерево", clicked = self.__populate_list)
         self.pushButton_4 = QtWidgets.QPushButton("Выгрузка дельты",clicked = self.__create_delta)
@@ -81,6 +86,9 @@ class OptionsWidget(QtWidgets.QWidget):
         self.priority.addItem("User")
 
         lay.addWidget(self.treeView)
+        lay.addLayout(self.lay_h)
+        self.lay_h.addWidget(self.radio_label)
+        self.lay_h.addWidget(self.rewrite_radio)
         lay.addWidget(self.priority)
         lay.addWidget(self.pushButton_2)
         # lay.addWidget(self.pushButton_3)
@@ -88,7 +96,10 @@ class OptionsWidget(QtWidgets.QWidget):
         lay.addWidget(self.pushButton_5)
 
     def __populate_list(self):
-        self.treemodel = self.treeView.populate_list(self.priority.currentText())
+        if self.rewrite_radio.isChecked():
+            self.treemodel = self.treeView.populate_list(self.priority.currentText())
+        else:
+            self.treemodel = self.treeView.populate_list(self.priority.currentText(),mode=0)
         df = aggregation(self.treemodel).fillna("")
         df = df.applymap(str)
         df = df.fillna("")
@@ -125,6 +136,7 @@ class UnionWidget(QtWidgets.QWidget):
         lay.addWidget(self.show_df)
     def shot_union(self):
         try:
+            QApplication.processEvents()
             df = pd.read_excel(os.path.dirname(os.path.realpath(__file__)) + "\data_temp.xlsx")
             self.tableView.setDataFrame(df)
         except:
@@ -149,13 +161,15 @@ class SettingWidget(QtWidgets.QWidget):
     @QtCore.pyqtSlot()
     def __update_data(self):
         data = []
+        self.Progress = ProgressBar(self.tableView.data_model.rowCount())
+
         for row in range(0, self.tableView.data_model.rowCount()):
             row_val_list = []
             for col in range(0, self.tableView.data_model.columnCount()):
                 row_val_list += [self.tableView.data_model.item(row, col).text()]
             if row_val_list[0] in set([i[0] for i in self.tableView.changed_items]):
                 data += [row_val_list]
-
+            self.Progress.SendStep()
         for elem in self.tableView.changed_items:
             if elem[1] == '0' and elem[2]==0:
                 data+=[[elem[0]]]
